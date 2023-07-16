@@ -3,7 +3,7 @@ import Link from "next/link"
 import styles from './styles.module.scss'
 import { useEffect, useRef, useState } from "react"
 
-const index = () => {
+const Index = () => {
     const [menu, setMenu] = useState(false);
     const wrapperRef = useRef(null) as any
     const logowrapRef= useRef(null) as any
@@ -60,4 +60,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index

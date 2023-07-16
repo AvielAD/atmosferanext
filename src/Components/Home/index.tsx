@@ -1,6 +1,6 @@
 import styles from './styles.module.scss'
 
-const index = () =>{
+const Index = () =>{
     return (
         <>
         <div className={styles.containerHome}>
@@ -13,4 +13,4 @@ const index = () =>{
     )
 }
 
-export default index;
+export default Index;

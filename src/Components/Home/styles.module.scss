@@ -1,3 +1,5 @@
+@import '../../Utilities//ResponsiveUtils/';
+
 .containerHome{
     width: 100%;
     height: 100vh;
@@ -8,4 +10,53 @@
     height: 100%;
     background-image: url('./mesa.jpg');
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerBanner{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bannerHome{
+    width: 60%;
+    color: white;
+    text-align: center;
+    @include MobileExtraSmall {
+        width: 80%;
+    }
+    @include MobileSmall {
+        width: 80%;
+    }
+    div{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        p{
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+        
+    }
+    
+}
+.buttonHome{
+    margin-top: 1rem;
+    background-color: blue;
+    border-radius: 15px;
+    width: 30%;
+    align-self: center;
+    padding: 1rem;
+    @include MobileExtraSmall {
+        width: 40%;
+    }
+    @include MobileSmall {
+        width: 40%;
+    }
 }

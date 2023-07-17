@@ -1,4 +1,4 @@
-@import '../../Utilities//ResponsiveUtils/';
+@import '../../Utilities/ResponsiveUtils/';
 
 .containerHome{
     width: 100%;
@@ -9,7 +9,13 @@
     width: 100%;
     height: 100%;
     background-image: url('./mesa.jpg');
-    background-size: cover;
+    background-size:cover;
+    @include MobileExtraSmall {
+        background-size: contain;
+    }
+    @include MobileSmall {
+        background-size: auto;
+    }
     display: flex;
     justify-content: center;
     align-items: center;

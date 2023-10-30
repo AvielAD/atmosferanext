@@ -63,7 +63,7 @@
     margin: 1rem;
     font-size: 1.5rem;
     width: 50%;
-    border-radius: 8px;
+    border-radius: 7px;
     background-color: #1c95f8;
     color: white;
     @include MobileSmall{
@@ -89,6 +89,7 @@
     color: white;
     padding: 2rem;
     width: 100%;
+    border-radius: 7px;
     @include MobileSmall{
         font-size: 1.5rem;
     

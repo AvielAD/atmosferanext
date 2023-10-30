@@ -100,7 +100,7 @@ const NetCore = () => {
                                 <button 
                                     type="submit"
                                     className={styles.FormStyleButton}
-                                    >Inscribir</button>
+                                    >Inscribirme</button>
                             </Form>
                         </div>)
 

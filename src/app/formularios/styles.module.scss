@@ -28,6 +28,15 @@
     @include MobileExtraSmall{
         height: 90%;
         width: 90%;
+    }
+    @include Tablet{
+        height: 100%;
+    }
+    @include Desktop{
+        height: 100%;
 
+    }
+    @include DesktopLarge{
+        height: 100%;
     }
 }

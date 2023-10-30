@@ -38,7 +38,7 @@
     margin: 1.5rem;
     padding: 0.5rem;
     font-size: 1rem;
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 8px;
     @include MobileSmall{
         font-size: 1.5rem;
@@ -47,6 +47,16 @@
     @include MobileExtraSmall{
         font-size: 1.5rem;
     }
+    @include Tablet{
+        font-size: 1.5rem;
+    }
+    @include Desktop{
+        font-size: 1.5rem;
+    }
+    @include DesktopLarge{
+        font-size: 1.5rem;
+    }
+
 }
 
 .FormStyleButton{
@@ -54,13 +64,15 @@
     font-size: 1.5rem;
     width: 50%;
     border-radius: 8px;
+    background-color: #1c95f8;
+    color: white;
     @include MobileSmall{
-        font-size: 1rem;
+        font-size: 1.5rem;
         width: 100%;
     
     }
     @include MobileExtraSmall{
-        font-size: 1rem;
+        font-size: 1.5rem;
         width: 100%;
     
     }
@@ -73,11 +85,24 @@
 
 
 .FormStyleTitle{
+    background-color: #1c95f8;
+    color: white;
+    padding: 2rem;
+    width: 100%;
     @include MobileSmall{
         font-size: 1.5rem;
     
     }
     @include MobileExtraSmall{
-        font-size: 1.4rem;
+        font-size: 1.1rem;
+    }
+    @include Tablet{
+        font-size: 1.5rem;
+    }
+    @include Desktop{
+        font-size: 1.5rem;
+    }
+    @include DesktopLarge{
+        font-size: 1rem;
     }
 }

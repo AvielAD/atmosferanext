@@ -16,7 +16,9 @@ const NetCore = () => {
                         validate={validations}
                         onSubmit={ (values, {resetForm}) => {
                             values.ideventocurso = 1
-                             instanceAxios.post('/formularios/inscribir', values)
+                            values.codigodescuento = values.codigodescuento==="" ? null: values.codigodescuento;
+                            
+                            instanceAxios.post('/formularios/inscribir', values)
                              .then((response: any)=>{
                                 console.log(response)
                                 alert(response.data.message)
@@ -31,21 +33,7 @@ const NetCore = () => {
                         {(props) =>
                         (<div className={styles.containerContentFormComponent}>
                             <Form className={styles.FormStyles}>
-                                <Field
-                                    type="text"
-                                    name="nombre"
-                                    autoComplete="off"
-                                    placeholder="Nombre"
-                                    className={styles.FormStyleField}
-                                ></Field>
-                                <ErrorMessage
-                                    name='nombre'
-                                    className={styles.FormStyleErrorMessage}
-                                >{message => 
-                                    <div className={styles.FormStyleErrorMessage}>
-                                        {message}
-                                    </div>
-                                }</ErrorMessage>
+                            <h1 className={styles.FormStyleTitle}>Atmosfera | Curso | .Net Core</h1>
 
                                 <Field
                                     type="text"
@@ -57,7 +45,26 @@ const NetCore = () => {
                                 ></Field>
                                 <ErrorMessage
                                     name='email'
-                                >{message => message}</ErrorMessage>
+                                >{message => 
+                                    <div className={styles.FormStyleErrorMessage}>
+                                        {message}
+                                    </div>
+                                }</ErrorMessage>
+                                <Field
+                                    type="text"
+                                    name="nombre"
+                                    autoComplete="off"
+                                    placeholder="Nombre"
+                                    className={styles.FormStyleField}
+                                ></Field>
+                                <ErrorMessage
+                                    name='nombre'
+                                >{message => 
+                                    <div className={styles.FormStyleErrorMessage}>
+                                        {message}
+                                    </div>
+                                }</ErrorMessage>
+
 
                                 <Field
                                     type="text"
@@ -68,7 +75,11 @@ const NetCore = () => {
                                 ></Field>
                                 <ErrorMessage
                                     name='apellidop'
-                                >{message => message}</ErrorMessage>
+                                >{message => 
+                                    <div className={styles.FormStyleErrorMessage}>
+                                        {message}
+                                    </div>
+                                }</ErrorMessage>
 
                                 <Field
                                     type="text"
@@ -77,9 +88,6 @@ const NetCore = () => {
                                     placeholder="Apellido 2"
                                     className={styles.FormStyleField}
                                 ></Field>
-                                <ErrorMessage
-                                    name='apellidom'
-                                >{message => message}</ErrorMessage>
 
 
                                 <Field
@@ -89,9 +97,6 @@ const NetCore = () => {
                                     placeholder="Codigo de Descuento"
                                     className={styles.FormStyleField}
                                 ></Field>
-                                <ErrorMessage
-                                    name='codigodescuento'
-                                >{message => message}</ErrorMessage>
                                 <button 
                                     type="submit"
                                     className={styles.FormStyleButton}

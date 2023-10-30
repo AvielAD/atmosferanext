@@ -4,5 +4,5 @@ interface FormularioAtmos{
     apellidop: string,
     apellidom: string,
     ideventocurso: number,
-    codigodescuento: string
+    codigodescuento: string | null
 }

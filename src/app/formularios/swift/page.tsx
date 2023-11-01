@@ -33,7 +33,7 @@ const Swift = () => {
                         {(props) =>
                         (<div className={styles.containerContentFormComponent}>
                             <Form className={styles.FormStyles}>
-                            <h1 className={styles.FormStyleTitle}>Curso | .Net Core</h1>
+                            <h1 className={styles.FormStyleTitle}>Curso | Swift</h1>
 
                                 <Field
                                     type="text"

@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',
 })
-const NetCore = () => {
+const Swift = () => {
     return (
         <>
                 <div className={styles.containerFormComponent}>
@@ -15,7 +15,7 @@ const NetCore = () => {
                         initialValues={initialValues}
                         validate={validations}
                         onSubmit={ (values, {resetForm}) => {
-                            values.ideventocurso = 1
+                            values.ideventocurso = 6
                             values.codigodescuento = values.codigodescuento==="" ? null: values.codigodescuento;
                             
                             instanceAxios.post('/formularios/inscribir', values)
@@ -139,4 +139,4 @@ const initialValues: FormularioAtmos = {
 }
 
 
-export default NetCore
+export default Swift

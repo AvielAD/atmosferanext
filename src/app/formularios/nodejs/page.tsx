@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import styles from './styles.module.scss'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',

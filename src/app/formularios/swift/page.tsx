@@ -3,11 +3,13 @@
 import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import styles from './styles.module.scss'
+import { useRouter } from 'next/navigation';
 
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',
 })
 const Swift = () => {
+    const router = useRouter()
     return (
         <>
                 <div className={styles.containerFormComponent}>
@@ -20,9 +22,7 @@ const Swift = () => {
                             
                             instanceAxios.post('/formularios/inscribir', values)
                              .then((response: any)=>{
-                                console.log(response)
-                                alert(response.data.message)
-                                resetForm();
+                                router.push('/templatesucceeded')
                              })
                              .catch((error)=>{
                                 console.log(error)

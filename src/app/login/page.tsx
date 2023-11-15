@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import axios from 'axios';
@@ -7,6 +7,9 @@ import styles from './styles.module.scss'
 import { FormularioLogin } from '@/DTOS/FormularioLogin';
 const instanceAxios = axios.create({
     baseURL: 'https://authmodule.localfix.mx',
+    //baseURL: 'https://localhost:3000',
+    withCredentials: true
+    
 })
 
 const Login = () => {
@@ -21,13 +24,13 @@ const Login = () => {
                         validate={validations}
                         onSubmit={(values, { resetForm }) => {
 
-                            instanceAxios.post('/api/authenticate', values)
+                            instanceAxios.post('/api/authenticate', values, )
                                 .then((response: any) => {
-                                    router.push('/templatesucceeded')
+                                    //router.push('/eventos/inscrito')
                                 })
                                 .catch((error) => {
                                     console.log(error)
-                                    alert(error.response.data.message)
+                                    //alert(error.response.data.message)
                                 })
                         }}
                     >

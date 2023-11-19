@@ -8,8 +8,7 @@ import { FormularioLogin } from '@/DTOS/FormularioLogin';
 const instanceAxios = axios.create({
     baseURL: 'https://authmodule.localfix.mx',
     //baseURL: 'https://localhost:3000',
-    withCredentials: true
-    
+        withCredentials:true
 })
 
 const Login = () => {
@@ -24,14 +23,16 @@ const Login = () => {
                         validate={validations}
                         onSubmit={(values, { resetForm }) => {
 
-                            instanceAxios.post('/api/authenticate', values, )
+                            instanceAxios.post('/api/authenticate', values, {withCredentials:true})
                                 .then((response: any) => {
                                     //router.push('/eventos/inscrito')
+                                console.log(response)
                                 })
                                 .catch((error) => {
                                     console.log(error)
                                     //alert(error.response.data.message)
                                 })
+                            
                         }}
                     >
                         {(props) => (

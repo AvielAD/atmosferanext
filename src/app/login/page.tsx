@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import styles from './styles.module.scss'
 import { FormularioLogin } from '@/DTOS/FormularioLogin';
+import { signIn } from 'next-auth/react';
+
 const instanceAxios = axios.create({
     baseURL: 'https://authmodule.localfix.mx',
     //baseURL: 'https://localhost:3000',
@@ -21,18 +23,18 @@ const Login = () => {
                     <Formik
                         initialValues={initialValues}
                         validate={validations}
-                        onSubmit={(values, { resetForm }) => {
+                        onSubmit={async (values) => {
 
-                            instanceAxios.post('/api/authenticate', values, {withCredentials:true})
-                                .then((response: any) => {
-                                    //router.push('/eventos/inscrito')
-                                console.log(response)
-                                })
-                                .catch((error) => {
-                                    console.log(error)
-                                    //alert(error.response.data.message)
-                                })
-                            
+                           await instanceAxios.post('/api/authenticate', values)
+
+                           var response = await signIn('credentials', {
+                                email: values.email,
+                                password: values.passkey,
+                                redirect: false
+                            })
+
+                            console.log(response)
+
                         }}
                     >
                         {(props) => (

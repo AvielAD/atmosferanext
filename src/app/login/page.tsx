@@ -33,8 +33,6 @@ const Login = () => {
                                 redirect: false
                             })
 
-                            console.log(response)
-
                         }}
                     >
                         {(props) => (

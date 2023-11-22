@@ -8,41 +8,37 @@ const instanceAxios = axios.create({
     //baseURL: 'https://localhost:3000',
     withCredentials: true
 })
-const handler = NextAuth({
-    providers: [
 
-        CredentialsProvider({
-            type: 'credentials',
-            credentials: {
-                email: { label: "Email", type: "email" },
-                password: { label: "Password", type: "password" }
-            },
-            async authorize(credentials, req) {
-                try {
-                    const { email, password } = credentials as { email: "", password: "" }
+const auth =  NextAuth( {
+        providers: [
 
-                    console.log("email: " + email + " password: " + password)
+            CredentialsProvider({
+                type: 'credentials',
+                credentials: {
+                    email: { label: "Email", type: "email" },
+                    password: { label: "Password", type: "password" }
+                },
+                async authorize(credentials, req) {
+                    try {
+                        const { email, password } = credentials as { email: "", password: "" }
+                        const response = await instanceAxios.post('/api/authenticate', {
+                            email,
+                            passkey: password
+                        })
+                        const responseUserInfo = response.data.data
+                        const user = { id: '1', name: String(responseUserInfo.nombre), email: String(responseUserInfo.email) }
 
-                    var response = await instanceAxios.get('/api/user')
-
-                    console.log(response)
-                    //var userInfo = await instanceAxios.get('/api/user')
-
-                    //console.log("informacion usuario: " + userInfo)
-
-                    const user = { id: '1', name: 'test', email: 'response@gmail.com' }
-
-                    return user
-                } catch (error) {
-                    console.log("Error trycatch " + error)
-                    return null
+                        return user
+                    } catch (error) {
+                        return null
+                    }
                 }
-            }
-        })
-    ],
-    pages: {
-        signIn: '/login'
-    }
-})
+            })
+        ],
+        pages: {
+            signIn: '/login'
+        }
+    })
 
-export { handler as GET, handler as POST }
+
+export { auth as GET, auth as POST }

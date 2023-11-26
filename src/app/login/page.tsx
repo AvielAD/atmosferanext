@@ -10,7 +10,7 @@ import { signIn } from 'next-auth/react';
 const instanceAxios = axios.create({
     baseURL: 'https://authmodule.localfix.mx',
     //baseURL: 'https://localhost:3000',
-        withCredentials:true
+    withCredentials:true
 })
 
 const Login = () => {
@@ -24,9 +24,6 @@ const Login = () => {
                         initialValues={initialValues}
                         validate={validations}
                         onSubmit={async (values) => {
-
-                           await instanceAxios.post('/api/authenticate', values)
-
                            var response = await signIn('credentials', {
                                 email: values.email,
                                 password: values.passkey,

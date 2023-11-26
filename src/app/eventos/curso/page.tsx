@@ -1,12 +1,25 @@
 'use client'
+import axios from "axios";
 import { useEffect, useState } from "react"
 
+const instanceAxios = axios.create({
+    baseURL: 'https://authmodule.localfix.mx',
+    //baseURL: 'http://localhost:3000',
+    withCredentials: true
+})
 const Curso = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [imageUrl, setImageUrl] = useState(null);
     
     useEffect( ()=>{
+
+         instanceAxios.get('/api/user').then((data)=>{
+                console.log(data)
+         }).catch((error)=>{
+
+         })
+/*
         fetch('https://authmodule.localfix.mx/api/user',{
+        //fetch('http://localhost:3000/api/user',{
             method: 'GET',
             credentials: 'include'
         })
@@ -16,7 +29,7 @@ const Curso = () => {
             setIsLoading(false)
         }).catch(()=>{
 
-        })
+        })*/
     },[])
 
 

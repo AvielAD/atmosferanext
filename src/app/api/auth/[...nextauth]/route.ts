@@ -34,13 +34,14 @@ const auth =  NextAuth( {
                             email: String(responseUserInfo.email),
                             token: String(responseUserInfo.token)
                         }
+                        
                         cookies().set({
                             name: "token",
                             value: responseUserInfo.token,
-                            httpOnly: true,
-                            sameSite: "lax"
+                            sameSite: "lax",
+                            httpOnly: true
                         })
-
+                        
                         return user
                     } catch (error) {
                         return null

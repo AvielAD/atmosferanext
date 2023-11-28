@@ -1,61 +1,49 @@
-'use client';
 
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { inscritos } from "@/DTOS/eventos/inscritos"
 
-const Inscrito = () => {
+const Inscrito = async () => {
 
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    fetch('https://atmosferaform.localfix.mx/inscripcion/inscritos', {
-      method: 'GET',
-      credentials: 'include'
-    })
-      .then((response) => response.json())
-      .then((userInfo) => {
-        console.log(userInfo)
-        setIsLoading(false)
-      }).catch(() => {
-
-      })
-  }, [])
-
-  console.log("status", status);
-  console.log("session",JSON.stringify(session));
+  let Inscritos: Array<inscritos> = []
+  fetch('http://localhost:3000/api/inscritos')
+  .then((response)=>response.json())
+  .then((data)=>{
+    console.log(data)
+  }).catch((error)=>{
+    console.log(error)
+  })
+  
   return (<>
     <div>
       <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Costo</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+
         </tbody>
+        {
+          Inscritos.map((item: inscritos, index: number) => {
+            return <>
+              <tr>
+                <th scope="row">{index}</th>
+                <td>{item.nombre}</td>
+                <td>{item.apellidop}</td>
+                <td>{item.curso}</td>
+                <td>{item.costo}</td>
+              </tr>
+
+            </>
+          })
+        }
       </table>
+
+
     </div>
   </>)
 }

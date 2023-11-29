@@ -1,7 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {Providers} from "./provider";
+import TopNavBar from '../../Components/TopNavBar'
+import { menunav, menuoption } from '@/DTOS/menuNav/menunav';
+
 const inter = Inter({ subsets: ['latin'] })
+
+const menusrutas: Array<menuoption> = [
+  {
+    nombreruta: "Inscritos", 
+    urlruta: "/eventos/inscrito"
+  }
+] 
 
 export const metadata: Metadata = {
   title: 'Atmósfera',
@@ -14,10 +24,9 @@ export default function EventosLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <div>
+        <TopNavBar rutas={menusrutas}/>
         <Providers>{children}</Providers> 
-        </body>
-    </html>
+    </div>
   )
 }

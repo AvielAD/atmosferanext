@@ -1,17 +1,25 @@
 
 import { inscritos } from "@/DTOS/eventos/inscritos"
+import { cookies } from "next/headers"
 
 const Inscrito = async () => {
-
+  const testcookies = cookies().get('token')
   let Inscritos: Array<inscritos> = []
-  fetch('http://localhost:3000/api/inscritos')
-  .then((response)=>response.json())
-  .then((data)=>{
-    console.log(data)
-  }).catch((error)=>{
-    console.log(error)
-  })
-  
+  if (testcookies)
+  await fetch('https://atmosferaform.localfix.mx/inscripcion/inscritos',{
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Authorization': `Bearer ${testcookies.value}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      Inscritos = data
+    })
+    .catch((error) => {
+    })
+
   return (<>
     <div>
       <table className="table">
@@ -26,11 +34,10 @@ const Inscrito = async () => {
         </thead>
         <tbody>
 
-        </tbody>
         {
           Inscritos.map((item: inscritos, index: number) => {
             return <>
-              <tr>
+              <tr key={index}>
                 <th scope="row">{index}</th>
                 <td>{item.nombre}</td>
                 <td>{item.apellidop}</td>
@@ -41,6 +48,8 @@ const Inscrito = async () => {
             </>
           })
         }
+        </tbody>
+
       </table>
 
 

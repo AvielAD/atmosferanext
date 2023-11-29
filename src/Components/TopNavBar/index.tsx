@@ -2,8 +2,11 @@
 import Link from "next/link"
 import styles from './styles.module.scss'
 import { useEffect, useRef, useState } from "react"
+import { menunav, menuoption } from "@/DTOS/menuNav/menunav"
+import { NextPage } from "next"
 
-const Index = () => {
+const Index = (props:menunav) => {
+    const { rutas } =props
     const [menu, setMenu] = useState(false);
     const wrapperRef = useRef(null) as any
     const logowrapRef= useRef(null) as any
@@ -39,10 +42,11 @@ const Index = () => {
                     className={`${styles.menuTopMobile} 
                     ${menu ? styles.menuView : styles.menuHidden}`}>
                         <ul className={styles.listMenu}>
-                            <Link href=''>Inicio</Link>
-                            <Link href=''>Nosotros</Link>
-                            <Link href=''>Team</Link>
-                            <Link href=''>Contacto</Link>
+                            {
+                                rutas.map((item: menuoption, index:number)=>{
+                                    return <Link key={index} href={item.urlruta}>{item.nombreruta}</Link>
+                                })
+                            }
                         </ul>
 
                     </div>

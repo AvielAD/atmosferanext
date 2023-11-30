@@ -1,20 +1,62 @@
-'use client'
-import useSWR from "swr"
-const fetcher = (url: string) => fetch(url).then(res => res.json())
+import { eventosview } from "@/DTOS/eventos/eventos"
+import { cookies } from "next/headers"
 
 
-const Evento = () => {
-    const { data, error } = useSWR('/api/user', fetcher)
+const Evento = async () => {
 
-    if (error) return <div>Failed to load</div>
-    if (!data) return <div>Loading...</div>
+    const testcookies = cookies().get('token')
+    let Eventos: Array<eventosview> = []
+    if (testcookies)
+        await fetch('https://atmosferaform.localfix.mx/api/evento', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${testcookies.value}`
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                Eventos = data
+            })
+            .catch((error) => {
+            })
 
-    console.log(data)
     return (<>
         <div>
-            prueba eventos
-        </div>
-    </>)
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Curso</th>
+                        <th scope="col">Costo</th>
+                        <th scope="col">Inicio Promocion</th>
+                        <th scope="col">Fin Promocion</th>
+                        <th scope="col">Inicio Curso</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {
+                        Eventos.map((item: eventosview, index: number) => {
+                            return <>
+                                <tr key={index}>
+                                    <th scope="row">{index}</th>
+                                    <td>{item.curso}</td>
+                                    <td>{item.costo}</td>
+                                    <td>{item.iniciopromocion}</td>
+                                    <td>{item.finpromocion}</td>
+                                    <td>{item.inicio}</td>
+                                </tr>
+
+                            </>
+                        })
+                    }
+                </tbody>
+
+            </table>
+
+
+        </div>    </>)
 }
 
 export default Evento

@@ -1,36 +1,56 @@
+import { Curso } from "@/DTOS/curso.dto"
 import { cookies } from "next/headers"
 const Curso = async () => {
+    //agregar curso
+
     const testcookies = cookies().get('token')
-    let UserInfo = {email: "", nombre:"", apellido:""}
-
+    let Cursos: Array<Curso> = []
     if (testcookies)
-        await fetch('https://authmodule.localfix.mx/api/user', {
-        //fetch('http://localhost:3000/api/user',{
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Authorization': `Bearer ${testcookies.value}`
-            }
-        })
-            .then((response) => response.json())
-            .then((userInfo) => {
-                console.log(userInfo)
-                UserInfo.email = userInfo.email
-                UserInfo.nombre = userInfo.nombre
-                UserInfo.apellido = userInfo.apellido
-            }).catch((error) => {
-                console.log(error)
-
-            })
-    console.log("Cookies: " + JSON.stringify(testcookies))
-
+    await fetch('https://atmosferaform.localfix.mx/api/curso',{
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${testcookies.value}`
+          }
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        Cursos = data
+      })
+      .catch((error) => {
+      })
     return (<>
-        <div>
-            prueba eventos
-            <p>Email: {UserInfo.email}</p>
-            <p>Nombre: {UserInfo.nombre}</p>
-            <p>Apellido: {UserInfo.apellido}</p>
-        </div>
+    <div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Costo</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {
+          Cursos.map((item: Curso, index: number) => {
+            return <>
+              <tr key={index}>
+                <th scope="row">{index}</th>
+                <td>{item.nombre}</td>
+                <td>{item.descripcion}</td>
+                <td>{item.costo}</td>
+              </tr>
+
+            </>
+          })
+        }
+        </tbody>
+
+      </table>
+
+
+    </div>
     </>)
 }
 

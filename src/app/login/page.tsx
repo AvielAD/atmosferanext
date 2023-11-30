@@ -27,7 +27,8 @@ const Login = () => {
                            var response = await signIn('credentials', {
                                 email: values.email,
                                 password: values.passkey,
-                                redirect: false
+                                //redirect: false,
+                                callbackUrl: '/eventos/inscrito'
                             })
 
                         }}

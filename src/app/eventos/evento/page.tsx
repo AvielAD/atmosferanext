@@ -1,7 +1,7 @@
 import { eventosview } from "@/DTOS/eventos/eventos"
 import { cookies } from "next/headers"
 
-
+import moment from "moment"
 const Evento = async () => {
 
     const testcookies = cookies().get('token')
@@ -23,14 +23,12 @@ const Evento = async () => {
 
     return (<>
         <div>
-            <table className="table">
+            <table className="table overflow-x-scroll">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Curso</th>
                         <th scope="col">Costo</th>
-                        <th scope="col">Inicio Promocion</th>
-                        <th scope="col">Fin Promocion</th>
                         <th scope="col">Inicio Curso</th>
                     </tr>
                 </thead>
@@ -40,12 +38,10 @@ const Evento = async () => {
                         Eventos.map((item: eventosview, index: number) => {
                             return <>
                                 <tr key={index}>
-                                    <th scope="row">{index}</th>
+                                    <th scope="row">{index+1}</th>
                                     <td>{item.curso}</td>
                                     <td>{item.costo}</td>
-                                    <td>{item.iniciopromocion}</td>
-                                    <td>{item.finpromocion}</td>
-                                    <td>{item.inicio}</td>
+                                    <td>{item.inicio.split("T")[0]}</td>
                                 </tr>
 
                             </>

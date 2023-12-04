@@ -40,8 +40,9 @@ const Add = () => {
             addFetcher('/api/evento', newEvent).then((data)=>{
                 console.log(data)
             })
+        router.push('/eventos/evento')
+
         }
-        //router.push('/eventos/evento')
     }
     console.log(dateStart)
 

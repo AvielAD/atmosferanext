@@ -1,15 +1,17 @@
 import { Curso } from "@/DTOS/curso.dto";
+import { eventoform, eventorequest } from "@/DTOS/eventos/eventoform";
+import { eventosview } from "@/DTOS/eventos/eventos";
 import { inscritos } from "@/DTOS/eventos/inscritos";
 import { response } from "@/DTOS/response/response";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
-    let Cursos: Array<Curso> = []
+    let EventosView: Array<eventosview> = []
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
-            await fetch('https://atmosferaform.localfix.mx/api/curso', {
+            await fetch('https://atmosferaform.localfix.mx/api/evento', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`
@@ -17,31 +19,26 @@ export async function GET() {
             })
                 .then((response) => response.json())
                 .then((userInfo) => {
-                    Cursos = userInfo
+                    EventosView = userInfo
                 }).catch((error) => {
                 })
 
-                return NextResponse.json(Cursos)
+                return NextResponse.json(EventosView)
     } catch (error) {
-        return NextResponse.json(Cursos)
+        return NextResponse.json(EventosView)
     }
 }
 export async function POST(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
-    const data:Curso = await req.json()
+    const data:eventorequest = await req.json()
     console.log("Body: "+ JSON.stringify(data))
     
     try {
         if (testcookies)
-            await fetch('https://atmosferaform.localfix.mx/api/curso', {
+            await fetch('https://atmosferaform.localfix.mx/api/evento', {
                 method: "POST",
-                body: JSON.stringify({
-                    nombre: data.nombre,
-                    descripcion: data.descripcion,
-                    temario: data.temario,
-                    costo: data.costo
-                }),
+                body: JSON.stringify(data),
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`,
                     'Content-Type': 'application/json'
@@ -68,7 +65,7 @@ export async function PUT(req: NextRequest) {
     
     try {
         if (testcookies)
-            await fetch('https://atmosferaform.localfix.mx/api/curso', {
+            await fetch('https://atmosferaform.localfix.mx/api/evento', {
                 method: "PUT",
                 body: JSON.stringify({
                     nombre: data.nombre,
@@ -102,7 +99,7 @@ export async function DELETE(request: NextRequest) {
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
-            await fetch(`https://atmosferaform.localfix.mx/api/curso?id=${id}`, {
+            await fetch(`https://atmosferaform.localfix.mx/api/evento?id=${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`,

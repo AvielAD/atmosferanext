@@ -4,16 +4,16 @@ import { CursoForm } from "@/DTOS/cursos/cursoform";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
-const addFetcher = async (url: string, data:Curso) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
+const addFetcher = async (url: string, data:Curso) => fetch(url, { method: "PUT", body: JSON.stringify(data) }).then(r => r.json())
 
-const Add = () => {
+const Update = (updateCurso: CursoForm) => {
     const router = useRouter()
     //agregar curso
 
     return (<>
         <Formik
             initialValues={initialValues}
-            validate={validations}
+            //validate={validations}
             onSubmit={async (values, { resetForm }) => {
                 const cursoInfo: Curso = { 
                     id: 0,
@@ -40,6 +40,7 @@ const Add = () => {
                         autoComplete="off"
                         placeholder="Nombre"
                         className="form-control"
+                        value = {updateCurso.nombre}
                     ></Field>
                     <ErrorMessage
                         name='nombre'
@@ -54,7 +55,7 @@ const Add = () => {
                         autoComplete="off"
                         placeholder="Descripcion"
                         className="form-control"
-
+                        value = {updateCurso.descripcion}
                     ></Field>
                     <ErrorMessage
                         name='descripcion'
@@ -70,6 +71,7 @@ const Add = () => {
                         autoComplete="off"
                         placeholder="temario"
                         className="form-control"
+                        value = {updateCurso.temario}
                     ></Field>
                     <ErrorMessage
                         name='temario'
@@ -85,6 +87,7 @@ const Add = () => {
                         autoComplete="off"
                         placeholder="Costo"
                         className="form-control"
+                        value = {updateCurso.costo}
 
                     ></Field>
                     <ErrorMessage
@@ -95,9 +98,9 @@ const Add = () => {
                         </div>
                         }</ErrorMessage>
 
-                    <button className="mt-5 btn btn-primary"
+                    <button className="btn btn-primary"
                         type="submit"
-                    >Agregar</button>
+                    >Actualizar</button>
                 </Form>
             </div>)
 
@@ -131,4 +134,4 @@ const initialValues: CursoForm = {
 }
 
 
-export default Add
+export default Update

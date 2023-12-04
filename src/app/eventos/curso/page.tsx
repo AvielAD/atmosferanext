@@ -1,11 +1,14 @@
 'use client'
 import useSWR from 'swr'
 import { Curso } from "@/DTOS/curso.dto"
+import MenuAdd from "@/Components/AddMenu"
+import { useRouter } from 'next/navigation'
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const deletefetcher = async (url: string) => fetch(url, { method: "DELETE" }).then(r => r.json())
 
 const Curso = () => {
+  const router = useRouter()
   //agregar curso
   const { data, error } = useSWR('/api/curso', fetcher)
 
@@ -13,8 +16,8 @@ const Curso = () => {
 
 
   return (<>
-    <div>
-      <table className="table">
+    <div className='d-flex justify-content-center'>
+      <table className="table w-lg-75">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -47,8 +50,9 @@ const Curso = () => {
 
       </table>
 
-
     </div>
+    <MenuAdd url='/eventos/curso/Add'></MenuAdd>
+
   </>)
 }
 

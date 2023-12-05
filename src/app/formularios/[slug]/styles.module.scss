@@ -1,0 +1,110 @@
+@import '../../../Utilities/ResponsiveUtils/';
+
+.containerFormComponent{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include MobileSmall{
+    
+    }
+    @include MobileExtraSmall{
+    
+    }
+}
+
+.containerContentFormComponent{
+    height: 70%;
+    width: 50%;
+    //border: solid 1px black;
+    @include MobileSmall{
+        height: 100%;
+        width: 100%;
+    }
+    @include MobileExtraSmall{
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.FormStyles{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.FormStyleField{
+    margin: 1.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 8px;
+    @include MobileSmall{
+        font-size: 1.5rem;
+    
+    }
+    @include MobileExtraSmall{
+        font-size: 1.5rem;
+    }
+    @include Tablet{
+        font-size: 1.5rem;
+    }
+    @include Desktop{
+        font-size: 1.5rem;
+    }
+    @include DesktopLarge{
+        font-size: 1.5rem;
+    }
+
+}
+
+.FormStyleButton{
+    margin: 1rem;
+    font-size: 1.5rem;
+    width: 50%;
+    border-radius: 7px;
+    background-color: #1c95f8;
+    color: white;
+    @include MobileSmall{
+        font-size: 1.5rem;
+        width: 100%;
+    
+    }
+    @include MobileExtraSmall{
+        font-size: 1.5rem;
+        width: 100%;
+    
+    }
+
+}
+
+.FormStyleErrorMessage {
+    color: #a30505;
+}
+
+
+.FormStyleTitle{
+    text-align: center;
+    background-color: #1c95f8;
+    color: white;
+    padding: 2rem;
+    width: 100%;
+    border-radius: 7px;
+    @include MobileSmall{
+        font-size: 1.5rem;
+    
+    }
+    @include MobileExtraSmall{
+        font-size: 1.1rem;
+    }
+    @include Tablet{
+        font-size: 1.5rem;
+    }
+    @include Desktop{
+        font-size: 1.5rem;
+    }
+    @include DesktopLarge{
+        font-size: 1rem;
+    }
+}

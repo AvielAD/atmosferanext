@@ -19,6 +19,10 @@ const menusrutas: Array<menuoption> = [
     nombreruta: "Eventos", 
     urlruta: "/eventos/evento"
   },
+  {
+    nombreruta: "Links Forms", 
+    urlruta: "/eventos/linkforms"
+  },
 ] 
 
 export const metadata: Metadata = {

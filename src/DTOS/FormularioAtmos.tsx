@@ -3,6 +3,6 @@ interface FormularioAtmos{
     email: string,
     apellidop: string,
     apellidom: string,
-    ideventocurso: number,
+    ideventocurso: string,
     codigodescuento: string | null
 }

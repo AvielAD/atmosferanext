@@ -6,5 +6,6 @@ export interface eventosview{
     iniciopromocion: string,
     finpromocion: string,
     inicio: string,
-    estado: string
+    estado: string,
+    uuid: string
 }

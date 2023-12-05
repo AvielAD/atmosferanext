@@ -1,6 +1,5 @@
 'use client'
 import { eventosview } from "@/DTOS/eventos/eventos"
-import { cookies } from "next/headers"
 import MenuAdd from "@/Components/AddMenu"
 import useSWR from "swr"
 
@@ -11,7 +10,6 @@ const Evento = () => {
     const { data, error } = useSWR('/api/evento', fetcher)
 
     if (!data) return <>loading...</>
-
     return (<>
         <div>
             <table className="table overflow-x-scroll">
@@ -35,6 +33,11 @@ const Evento = () => {
                                     <td>{item.costo}</td>
                                     <td>{item.inicio.split("T")[0]}</td>
                                     <td>
+                                    <i onClick={
+                                            () => 
+                                            navigator.clipboard.writeText(`https://atmosferanext.vercel.app/formularios/${item.uuid}`)
+                                        } className='m-2 bi bi-share'></i>
+
                                         <i onClick={
                                             () => deletefetcher(`/api/evento?id=${item.id}`)
                                         } className='m-2 bi bi-trash'></i>

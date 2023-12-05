@@ -1,25 +1,13 @@
 
+'use client'
 import { inscritos } from "@/DTOS/eventos/inscritos"
-import { cookies } from "next/headers"
+import useSWR from "swr"
 
-const Inscrito = async () => {
-  const testcookies = cookies().get('token')
-  let Inscritos: Array<inscritos> = []
-  if (testcookies)
-  await fetch('https://atmosferaform.localfix.mx/inscripcion/inscritos',{
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-            'Authorization': `Bearer ${testcookies.value}`
-        }
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      Inscritos = data
-    })
-    .catch((error) => {
-    })
+const fetcher = (url: string) => fetch(url).then(r => r.json())
 
+const Inscrito = () => {
+  const { data, error } = useSWR('/api/inscritos', fetcher)
+  if (!data) return <>loading...</>
   return (<>
     <div>
       <table className="table">
@@ -35,17 +23,18 @@ const Inscrito = async () => {
         <tbody>
 
         {
-          Inscritos.map((item: inscritos, index: number) => {
-            return <>
+          
+          data.map((item: inscritos, index: number) => {
+            return (
               <tr key={index}>
-                <th scope="row">{index}</th>
+                <th scope="row">{data.length-index}</th>
                 <td>{item.nombre}</td>
                 <td>{item.apellidop}</td>
                 <td>{item.curso}</td>
                 <td>{item.costo}</td>
               </tr>
 
-            </>
+            )
           })
         }
         </tbody>

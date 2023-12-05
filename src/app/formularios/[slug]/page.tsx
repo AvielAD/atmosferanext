@@ -3,13 +3,32 @@ import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import styles from './styles.module.scss'
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { eventosview } from '@/DTOS/eventos/eventos';
 
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',
 })
 
 const FormularioDynamic = ({ params }: { params: { slug: string } })=>{
+    const [dataEvento, setDataEvento] = useState<eventosview>({} as eventosview)
+
     const router = useRouter()
+
+    useEffect(()=>{
+        instanceAxios.get('/inscripcion/inscritobyid',{
+            params:{
+                id: params.slug
+            }
+        }).then((response)=>{
+            setDataEvento(response.data)
+        }).catch(error=>{
+
+        })
+    },[])
+
+    console.log(dataEvento)
+    if(!dataEvento) return <>loading....</>
 
     return (
         <>
@@ -34,7 +53,7 @@ const FormularioDynamic = ({ params }: { params: { slug: string } })=>{
                         {(props) =>
                         (<div className={styles.containerContentFormComponent}>
                             <Form className={styles.FormStyles}>
-                            <h1 className={styles.FormStyleTitle}>Curso | Adobe After Effects</h1>
+                            <h1 className={styles.FormStyleTitle}>Curso | {dataEvento.curso}</h1>
 
                                 <Field
                                     type="text"

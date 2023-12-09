@@ -15,10 +15,9 @@ const Evento = () => {
             <table className="table overflow-x-scroll">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Curso</th>
-                        <th scope="col">Costo</th>
                         <th scope="col">Inicio Curso</th>
+                        <th scope="col">Inscritos</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -28,10 +27,9 @@ const Evento = () => {
                         data.map((item: eventosview, index: number) => {
                             return (
                                 <tr key={index}>
-                                    <th scope="row">{index + 1}</th>
                                     <td>{item.curso}</td>
-                                    <td>{item.costo}</td>
                                     <td>{item.inicio.split("T")[0]}</td>
+                                    <td className="text-center">{item.inscritos}</td>
                                     <td>
                                     <i onClick={
                                             () => 

@@ -5,129 +5,134 @@ import styles from './styles.module.scss'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { eventosview } from '@/DTOS/eventos/eventos';
+import { fetchData } from 'next-auth/client/_utils';
 
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',
 })
 
-const FormularioDynamic = ({ params }: { params: { slug: string } })=>{
+const FormularioDynamic = ({ params }: { params: { slug: string } }) => {
     const [dataEvento, setDataEvento] = useState<eventosview>({} as eventosview)
 
     const router = useRouter()
 
-    useEffect(()=>{
-        instanceAxios.get('/inscripcion/inscritobyid',{
-            params:{
-                id: params.slug
-            }
-        }).then((response)=>{
-            setDataEvento(response.data)
-        }).catch(error=>{
+    useEffect(() => {
+        //if (params.slug)
+            const fetchData = () => {
+                instanceAxios.get('/inscripcion/inscritobyid', {
+                    params: {
+                        id: params.slug
+                    }
+                }).then((response) => {
+                    setDataEvento(response.data)
+                }).catch(error => {
 
-        })
-    },[])
+                })
+            }
+            fetchData()
+    }, [params.slug])
 
     console.log(dataEvento)
-    if(!dataEvento) return <>loading....</>
+    if (!dataEvento) return <>loading....</>
 
     return (
         <>
-                <div className={styles.containerFormComponent}>
-                    <Formik
-                        initialValues={initialValues}
-                        validate={validations}
-                        onSubmit={ (values, {resetForm}) => {
-                            values.ideventocurso = params.slug
-                            values.codigodescuento = values.codigodescuento==="" ? null: values.codigodescuento;
-                            
-                            instanceAxios.post('/formularios/inscribir', values)
-                             .then((response: any)=>{
+            <div className={styles.containerFormComponent}>
+                <Formik
+                    initialValues={initialValues}
+                    validate={validations}
+                    onSubmit={(values, { resetForm }) => {
+                        values.ideventocurso = params.slug
+                        values.codigodescuento = values.codigodescuento === "" ? null : values.codigodescuento;
+
+                        instanceAxios.post('/formularios/inscribir', values)
+                            .then((response: any) => {
                                 router.push('/templatesucceeded')
-                             })
-                             .catch((error)=>{
+                            })
+                            .catch((error) => {
                                 console.log(error)
                                 alert(error.response.data.message)
-                             })
-                        }}
-                    >
-                        {(props) =>
-                        (<div className={styles.containerContentFormComponent}>
-                            <Form className={styles.FormStyles}>
+                            })
+                    }}
+                >
+                    {(props) =>
+                    (<div className={styles.containerContentFormComponent}>
+                        <Form className={styles.FormStyles}>
                             <h1 className={styles.FormStyleTitle}>Curso | {dataEvento.curso}</h1>
 
-                                <Field
-                                    type="text"
-                                    name="email"
-                                    autoComplete="off"
-                                    placeholder="Email"
-                                    className={styles.FormStyleField}
+                            <Field
+                                type="text"
+                                name="email"
+                                autoComplete="off"
+                                placeholder="Email"
+                                className={styles.FormStyleField}
 
-                                ></Field>
-                                <ErrorMessage
-                                    name='email'
-                                >{message => 
-                                    <div className={styles.FormStyleErrorMessage}>
-                                        {message}
-                                    </div>
+                            ></Field>
+                            <ErrorMessage
+                                name='email'
+                            >{message =>
+                                <div className={styles.FormStyleErrorMessage}>
+                                    {message}
+                                </div>
                                 }</ErrorMessage>
-                                <Field
-                                    type="text"
-                                    name="nombre"
-                                    autoComplete="off"
-                                    placeholder="Nombre"
-                                    className={styles.FormStyleField}
-                                ></Field>
-                                <ErrorMessage
-                                    name='nombre'
-                                >{message => 
-                                    <div className={styles.FormStyleErrorMessage}>
-                                        {message}
-                                    </div>
-                                }</ErrorMessage>
-
-
-                                <Field
-                                    type="text"
-                                    name="apellidop"
-                                    autoComplete="off"
-                                    placeholder="Apellido"
-                                    className={styles.FormStyleField}
-                                ></Field>
-                                <ErrorMessage
-                                    name='apellidop'
-                                >{message => 
-                                    <div className={styles.FormStyleErrorMessage}>
-                                        {message}
-                                    </div>
+                            <Field
+                                type="text"
+                                name="nombre"
+                                autoComplete="off"
+                                placeholder="Nombre"
+                                className={styles.FormStyleField}
+                            ></Field>
+                            <ErrorMessage
+                                name='nombre'
+                            >{message =>
+                                <div className={styles.FormStyleErrorMessage}>
+                                    {message}
+                                </div>
                                 }</ErrorMessage>
 
-                                <Field
-                                    type="text"
-                                    name="apellidom"
-                                    autoComplete="off"
-                                    placeholder="Apellido 2"
-                                    className={styles.FormStyleField}
-                                ></Field>
+
+                            <Field
+                                type="text"
+                                name="apellidop"
+                                autoComplete="off"
+                                placeholder="Apellido"
+                                className={styles.FormStyleField}
+                            ></Field>
+                            <ErrorMessage
+                                name='apellidop'
+                            >{message =>
+                                <div className={styles.FormStyleErrorMessage}>
+                                    {message}
+                                </div>
+                                }</ErrorMessage>
+
+                            <Field
+                                type="text"
+                                name="apellidom"
+                                autoComplete="off"
+                                placeholder="Apellido 2"
+                                className={styles.FormStyleField}
+                            ></Field>
 
 
-                                <Field
-                                    type="text"
-                                    name="codigodescuento"
-                                    autoComplete="off"
-                                    placeholder="Codigo de Descuento"
-                                    className={styles.FormStyleField}
-                                ></Field>
-                                <button 
-                                    type="submit"
-                                    className={styles.FormStyleButton}
-                                    >Inscribirme</button>
-                            </Form>
-                        </div>)
+                            <Field
+                                type="text"
+                                name="codigodescuento"
+                                autoComplete="off"
+                                placeholder="Codigo de Descuento"
+                                className={styles.FormStyleField}
+                            ></Field>
+                            <button
+                                type="submit"
+                                className={styles.FormStyleButton}
+                            >Inscribirme</button>
+                        </Form>
+                    </div>)
 
-                        }
+                    }
 
-                    </Formik>
-                </div>
+                </Formik>
+            </div>
         </>
     )
 }

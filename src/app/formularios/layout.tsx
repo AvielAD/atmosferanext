@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import styles from './styles.module.scss'
 
 export const metadata: Metadata = {
-  title: 'Atmósfera | .net core',
+  title: 'Atmósfera | Formulario',
   description: 'Formulario de Registro',
 }
 

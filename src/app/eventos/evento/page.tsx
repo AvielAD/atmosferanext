@@ -11,6 +11,7 @@ const Evento = () => {
 
     if (!data) return <>loading...</>
     return (<>
+    <h1 className="text-center">Eventos próximos</h1>
         <div>
             <table className="table overflow-x-scroll">
                 <thead>

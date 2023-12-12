@@ -1,10 +1,11 @@
 'use client'
+import { codigodescuento, codigodescuentoform } from "@/DTOS/codigo/codigo.dto";
 import { Curso } from "@/DTOS/curso.dto";
 import { CursoForm } from "@/DTOS/cursos/cursoform";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
-const addFetcher = async (url: string, data:Curso) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
+const addFetcher = async (url: string, data:codigodescuento) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
 
 const Add = () => {
     const router = useRouter()
@@ -15,24 +16,22 @@ const Add = () => {
             initialValues={initialValues}
             validate={validations}
             onSubmit={async (values, { resetForm }) => {
-                const cursoInfo: Curso = { 
-                    id: 0,
+                const cursoInfo: codigodescuento = { 
                     nombre: values.nombre,
-                    descripcion: values.descripcion,
-                    temario: values.temario,
-                    costo: parseFloat(values.costo)
+                    codigo: values.codigo,
+                    descuento: parseFloat(values.descuento),
                 }
-                addFetcher('/api/curso', cursoInfo).then((data)=>{
+                addFetcher('/api/codigo', cursoInfo).then((data)=>{
                     console.log(data)
                 })
                 resetForm()
-                router.push('/eventos/curso')
+                router.push('/eventos/codigodescuento')
             }}
         >
             {(props) =>
             (<div >
                 <Form className="row gy-1 px-4">
-                    <h1 >Agregar Curso</h1>
+                    <h1 >Agregar Código Descuento</h1>
 
                     <Field
                         type="text"
@@ -50,14 +49,14 @@ const Add = () => {
                         }</ErrorMessage>
                     <Field
                         type="text"
-                        name="descripcion"
+                        name="codigo"
                         autoComplete="off"
-                        placeholder="Descripcion"
+                        placeholder="Código"
                         className="form-control"
 
                     ></Field>
                     <ErrorMessage
-                        name='descripcion'
+                        name='codigo'
                     >{message =>
                         <div className="text-danger">
                             {message}
@@ -66,29 +65,13 @@ const Add = () => {
 
                     <Field
                         type="text"
-                        name="temario"
+                        name="descuento"
                         autoComplete="off"
-                        placeholder="temario"
+                        placeholder="Descuento"
                         className="form-control"
                     ></Field>
                     <ErrorMessage
-                        name='temario'
-                    >{message =>
-                        <div className="text-danger">
-                            {message}
-                        </div>
-                        }</ErrorMessage>
-
-                    <Field
-                        type="text"
-                        name="costo"
-                        autoComplete="off"
-                        placeholder="Costo"
-                        className="form-control"
-
-                    ></Field>
-                    <ErrorMessage
-                        name='costo'
+                        name='descuento'
                     >{message =>
                         <div className="text-danger">
                             {message}
@@ -106,28 +89,24 @@ const Add = () => {
         </Formik>
     </>)
 }
-const validations = (values: CursoForm) => {
-    let errors = {} as CursoForm;
+const validations = (values: codigodescuentoform) => {
+    let errors = {} as codigodescuentoform;
 
     if (!values.nombre) {
         errors.nombre = 'Campo Requerido'
     }
-    if (!values.descripcion) {
-        errors.descripcion = 'Campo Requerido'
+    if (!values.codigo) {
+        errors.codigo = 'Campo Requerido'
     }
-    if (!values.temario) {
-        errors.temario = 'Campo Requerido'
-    }
-    if (!values.costo) {
-        errors.costo = 'Campo Requerido'
+    if (!values.descuento) {
+        errors.descuento = 'Campo Requerido'
     }
     return errors
 }
-const initialValues: CursoForm = {
+const initialValues: codigodescuentoform = {
     nombre: "",
-    descripcion: "",
-    temario: "",
-    costo: ""
+    codigo: "",
+    descuento: "",
 }
 
 

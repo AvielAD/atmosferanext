@@ -9,6 +9,7 @@ const Inscrito = () => {
   const { data, error } = useSWR('/api/inscritos', fetcher)
   if (!data) return <>loading...</>
   return (<>
+  <h1 className="text-center">Inscritos en Cursos Activos</h1>
     <div>
       <table className="table">
         <thead>

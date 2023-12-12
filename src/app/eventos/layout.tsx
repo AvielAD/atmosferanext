@@ -20,8 +20,8 @@ const menusrutas: Array<menuoption> = [
     urlruta: "/eventos/evento"
   },
   {
-    nombreruta: "Links Forms", 
-    urlruta: "/eventos/linkforms"
+    nombreruta: "Codigo Descuento", 
+    urlruta: "/eventos/codigodescuento"
   },
 ] 
 

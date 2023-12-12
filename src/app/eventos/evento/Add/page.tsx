@@ -47,7 +47,7 @@ const Add = () => {
     console.log(dateStart)
 
     return (<>
-    <h1>Evento</h1>
+    <h1 className="text-center">Agregar Evento</h1>
         <form onSubmit={onSubmitAdd} className="m-3">
             <label className="form-label">Seleccionar Curso</label>
             <select name="idcurso" className="form-select">

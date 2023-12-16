@@ -4,3 +4,9 @@ export interface instructor{
     apellido: string,
     email: string
 }
+
+export interface instructorForm{
+    nombre:string,
+    apellido:string,
+    email:string
+}

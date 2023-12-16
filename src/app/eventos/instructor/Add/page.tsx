@@ -1,11 +1,11 @@
 'use client'
 import { Curso } from "@/DTOS/curso.dto";
 import { CursoForm } from "@/DTOS/cursos/cursoform";
-import { instructor } from "@/DTOS/instructor/instructor.dto";
+import { instructor, instructorForm } from "@/DTOS/instructor/instructor.dto";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
-const addFetcher = async (url: string, data:instructor) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
+const addFetcher = async (url: string, data:instructorForm) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
 
 const Add = () => {
     const router = useRouter()
@@ -16,7 +16,7 @@ const Add = () => {
             initialValues={initialValues}
             validate={validations}
             onSubmit={async (values, { resetForm }) => {
-                const instructorInfo: instructor = { 
+                const instructorInfo: instructorForm = { 
                     nombre: values.nombre,
                     apellido: values.apellido,
                     email: values.email,
@@ -89,8 +89,8 @@ const Add = () => {
         </Formik>
     </>)
 }
-const validations = (values: instructor) => {
-    let errors = {} as instructor;
+const validations = (values: instructorForm) => {
+    let errors = {} as instructorForm;
 
     if (!values.nombre) {
         errors.nombre = 'Campo Requerido'
@@ -103,7 +103,7 @@ const validations = (values: instructor) => {
     }
     return errors
 }
-const initialValues: instructor = {
+const initialValues: instructorForm = {
     nombre: "",
     apellido: "",
     email: ""

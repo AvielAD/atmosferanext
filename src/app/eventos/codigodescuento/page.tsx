@@ -1,6 +1,5 @@
 'use client'
 import useSWR from 'swr'
-import { Curso } from "@/DTOS/curso.dto"
 import MenuAdd from "@/Components/AddMenu"
 import { useRouter } from 'next/navigation'
 import { codigodescuento, codigodescuentoupdate } from '@/DTOS/codigo/codigo.dto'
@@ -44,6 +43,7 @@ const Codigo = () => {
       </table>
 
     </div>
+    
     <MenuAdd url='/eventos/codigodescuento/Add'></MenuAdd>
 
   </>)

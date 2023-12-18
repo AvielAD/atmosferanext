@@ -32,7 +32,6 @@ const FormularioDynamic = ({ params }: { params: { slug: string } }) => {
             fetchData()
     }, [params.slug])
 
-    console.log(dataEvento)
     if (!dataEvento) return <>loading....</>
 
     return (

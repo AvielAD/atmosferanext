@@ -2,14 +2,38 @@
 import { eventosview } from "@/DTOS/eventos/eventos"
 import MenuAdd from "@/Components/AddMenu"
 import useSWR from "swr"
-
+import { useState } from "react"
+import { response } from "@/DTOS/response/response"
+import { useRouter } from "next/navigation"
+import ToastPersonal from '@/Components/Toast'
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const deletefetcher = async (url: string) => fetch(url, { method: "DELETE" }).then(r => r.json())
 
 const Evento = () => {
+     const router = useRouter()
+
     const { data, error } = useSWR('/api/evento', fetcher)
+    const [isVisibleToast, setIsVisibleToast] = useState(false)
+    const [dataResponse, setDataResponse] = useState<response>({} as response)
 
     if (!data) return <>loading...</>
+
+    const callDelete = (id: number) => {
+        deletefetcher(`/api/curso?id=${id}`).then((data) => {
+          setDataResponse(data)
+    
+        })
+    
+        setIsVisibleToast(true)
+    
+        const timer = setTimeout(() => {
+          setIsVisibleToast(false)
+          router.push('/eventos/evento')
+        }, 3000)
+    
+        return ()=>clearTimeout(timer)
+      }
+
     return (<>
     <h1 className="text-center">Eventos próximos</h1>
         <div>
@@ -37,8 +61,7 @@ const Evento = () => {
                                             navigator.clipboard.writeText(`https://atmosferanext.vercel.app/formularios/${item.uuid}`)
                                         } className='m-2 bi bi-share'></i>
 
-                                        <i onClick={
-                                            () => deletefetcher(`/api/evento?id=${item.id}`)
+                                        <i onClick={() => callDelete(item.id)
                                         } className='m-2 bi bi-trash'></i>
                                     </td>
                                 </tr>)
@@ -48,7 +71,11 @@ const Evento = () => {
 
             </table>
             <MenuAdd url='/eventos/evento/Add'></MenuAdd>
+            <div className={`z-1 fixed-bottom d-flex justify-content-center ${isVisibleToast ? 'd-block' : 'd-none'}`}>
 
+<ToastPersonal message={dataResponse.message} succedded={dataResponse.succeeded}></ToastPersonal>
+
+</div>
 
         </div>    </>)
 }

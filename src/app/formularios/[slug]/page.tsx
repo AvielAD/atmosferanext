@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import styles from './styles.module.scss'
+import parent from './parent.module.scss'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { eventosview } from '@/DTOS/eventos/eventos';
@@ -18,24 +19,25 @@ const FormularioDynamic = ({ params }: { params: { slug: string } }) => {
 
     useEffect(() => {
         //if (params.slug)
-            const fetchData = () => {
-                instanceAxios.get('/inscripcion/inscritobyid', {
-                    params: {
-                        id: params.slug
-                    }
-                }).then((response) => {
-                    setDataEvento(response.data)
-                }).catch(error => {
+        const fetchData = () => {
+            instanceAxios.get('/inscripcion/inscritobyid', {
+                params: {
+                    id: params.slug
+                }
+            }).then((response) => {
+                setDataEvento(response.data)
+            }).catch(error => {
 
-                })
-            }
-            fetchData()
+            })
+        }
+        fetchData()
     }, [params.slug])
 
     if (!dataEvento) return <>loading....</>
 
     return (
         <>
+
             <div className={styles.containerFormComponent}>
                 <Formik
                     initialValues={initialValues}

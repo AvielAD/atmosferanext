@@ -13,8 +13,8 @@ export default function FormulariosLayout({
 }) {
   return (
     <>
-        <div className={styles.containerFormulario}>
-            <div className={styles.containerContentFormulario}>
+        <div className="">
+            <div className="">
                 {children}
             </div>
         </div>

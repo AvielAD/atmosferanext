@@ -58,7 +58,7 @@ const Evento = () => {
                                     <td>
                                     <i onClick={
                                             () => 
-                                            navigator.clipboard.writeText(`https://atmosferanext.vercel.app/formularios/${item.uuid}`)
+                                            navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_URL}formularios/${item.uuid}`)
                                         } className='m-2 bi bi-share'></i>
 
                                         <i onClick={() => callDelete(item.id)

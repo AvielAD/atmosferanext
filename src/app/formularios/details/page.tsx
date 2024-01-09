@@ -1,6 +1,8 @@
 
 import styles from './styles.module.scss'
-
+import Image from 'next/image'
+import Atmos from './assets/atmw.jpg'
+import IconAtmos from './assets/atmosfera.jpg'
 const Details = () => {
     return (
         <>
@@ -36,7 +38,9 @@ const Details = () => {
                     <div className={`${styles.bgSectionForm}`}>
                         <div>Curso profesional de diseño web</div>
                         <div>Presencial Programacion diseño</div>
-                        <div>imagen</div>
+                        <div className={`${styles.ContainerImageNext}`}>
+                            <Image src={Atmos} alt='picture' fill></Image>
+                        </div>
                         <p>En este curso verás lo multifacetico en la creación de un sitio web: por un lado verás las técnicas básicas para planificar una web, organizar la información en wireframes, y crear una gramática visual con tipografía, paletas de colores, espaciados, composición, ilustración, UI & UX . Después te adentrarás a la construcción usando de manera profesional HTML, CSS, y JavaScript.</p>
                         <p>Aprenderás a escribir tu propio código y cambiarás tu forma de ver (y de diseñar) la web, entendiendo cómo funciona por dentro y por fuera, cómo diseñar una web responsive para que sea más efectiva. Y si el diseño no es lo tuyo, este curso puede suponer una buena base para comenzar en el mundo del Desarrollo Web Front-end.</p>
                         <div>
@@ -62,7 +66,15 @@ const Details = () => {
                     </div>
                 </div>
                 <div className='col'>
-                    <div className={`${styles.bgSectionForm}`}>imagen atmosfera</div>
+                    <div className={`${styles.bgSectionForm}`}>
+                        <div className='d-flex justify-content-center'>
+                            <div className={styles.ContainerImageNext2}>
+                                <Image className={styles.IconAtmos} src={IconAtmos} alt='picture' fill></Image>
+                            </div>
+                        </div>
+                        imagen atmosfera
+                        
+                    </div>
                     <div className={`${styles.bgSectionForm}`}>
                         <p>beneficios</p>
                         <div>Crea tu propia startup</div>

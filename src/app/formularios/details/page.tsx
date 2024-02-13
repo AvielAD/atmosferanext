@@ -1,8 +1,10 @@
+'use client'
 
 import styles from './styles.module.scss'
 import Image from 'next/image'
 import Atmos from './assets/atmw.jpg'
 import IconAtmos from './assets/atmosfera.jpg'
+
 const Details = () => {
     return (
         <>
@@ -12,6 +14,7 @@ const Details = () => {
                         <div className=''>
                             <div className={`rounded ${styles.bgHeaderDetails}`}>20%</div>
                             <div>Promocion</div>
+                            
                         </div>
                     </div>
                     <div className='col'>
@@ -88,3 +91,8 @@ const Details = () => {
 }
 
 export default Details
+
+
+
+  
+ 

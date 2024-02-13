@@ -2,11 +2,9 @@
 import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import styles from './styles.module.scss'
-import parent from './parent.module.scss'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { eventosview } from '@/DTOS/eventos/eventos';
-import { fetchData } from 'next-auth/client/_utils';
 
 const instanceAxios = axios.create({
     baseURL: 'https://atmosferaform.localfix.mx',
@@ -59,6 +57,7 @@ const FormularioDynamic = ({ params }: { params: { slug: string } }) => {
                     {(props) =>
                     (<div className={styles.containerContentFormComponent}>
                         <Form className={styles.FormStyles}>
+                            
                             <h1 className={styles.FormStyleTitle}>Curso | {dataEvento.curso}</h1>
 
                             <Field

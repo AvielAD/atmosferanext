@@ -8,29 +8,17 @@ const inter = Inter({ subsets: ['latin'] })
 
 const menusrutas: Array<menuoption> = [
   {
-    nombreruta: "Inscritos", 
-    urlruta: "/eventos/inscrito"
+    nombreruta: "Inicio", 
+    urlruta: "/workline/"
   },
   {
-    nombreruta: "Cursos", 
-    urlruta: "/eventos/curso"
+    nombreruta: "Tickets", 
+    urlruta: "/workline/tickets"
   },
   {
-    nombreruta: "Instructores", 
-    urlruta: "/eventos/instructor"
-  },
-  {
-    nombreruta: "Eventos", 
-    urlruta: "/eventos/evento"
-  },
-  {
-    nombreruta: "Codigo Descuento", 
-    urlruta: "/eventos/codigodescuento"
-  },
-  {
-    nombreruta: "WorkLine", 
-    urlruta: "/workline"
-  },
+    nombreruta: "Servicios", 
+    urlruta: "/workline/servicios"
+  }
 ] 
 
 export const metadata: Metadata = {

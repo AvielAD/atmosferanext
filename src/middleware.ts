@@ -3,5 +3,5 @@ export {default} from 'next-auth/middleware'
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/eventos/:path*',
+  matcher: ['/eventos/:path*', '/workline/:path'],
 }

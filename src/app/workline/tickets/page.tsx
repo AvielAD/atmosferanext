@@ -33,7 +33,7 @@ const Tickets = () => {
       router.push('/eventos/curso')
     }, 3000)
 
-    return ()=>clearTimeout(timer)
+    return () => clearTimeout(timer)
   }
 
   return (<>
@@ -46,7 +46,6 @@ const Tickets = () => {
             <th scope="col">Nombre</th>
             <th scope="col">Categoria</th>
             <th scope="col">Inicio</th>
-            <th scope="col">Fin</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -60,7 +59,12 @@ const Tickets = () => {
                   <td>{item.nombre}</td>
                   <td>{item.category.nombre}</td>
                   <td>{item.fechainicio?.toString().split("T")[1]}</td>
-                  <td>{item.fechafinal?.toString().split("T")[1]}</td>
+                  <td>
+                    <i onClick={
+                      () => router.push(`/workline/tickets/Details/${item.uuid}`)
+
+                    } className='m-2 bi bi-eye'></i>
+                  </td>
                 </tr>
               )
             })

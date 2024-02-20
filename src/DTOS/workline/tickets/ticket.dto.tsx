@@ -3,7 +3,9 @@ export interface ticketdto{
     fechainicio: Date,
     fechafinal: Date,
     nombre: string,
-    category: categorydto
+    uuid: string,
+    category: categorydto,
+    
 }
 
 export interface categorydto{
@@ -19,4 +21,20 @@ export interface createTicketDto{
 export interface createTicketFormDto{
     nombre: string,
     idcatticket: string
+}
+
+export interface servicedto{
+    id: string,
+    nombre:string,
+    costo: number,
+}
+export interface ticketallDto{
+    id: number,
+    fechainicio: Date,
+    fechafinal: Date,
+    nombre: string,
+    uuid: string,
+    total: number,
+    category: categorydto,
+    servicios: Array<servicedto>
 }

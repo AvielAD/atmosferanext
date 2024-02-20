@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
     const data:createTicketDto = await req.json()
-    console.log("Body: "+ JSON.stringify(data))
     
     try {
         if (testcookies)

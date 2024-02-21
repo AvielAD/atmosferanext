@@ -17,6 +17,7 @@ export async function GET() {
                 .then((response) => response.json())
                 .then((userInfo) => {
                     ticketsView = userInfo
+                    console.log(userInfo)
                 }).catch((error) => {
                 })
 

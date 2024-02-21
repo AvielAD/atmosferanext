@@ -2,12 +2,14 @@
 
 import useSWR from "swr"
 import { ticketallDto } from "@/DTOS/workline/tickets/ticket.dto"
+import { useState } from "react"
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
     const uuid = params.slug
+    const [updateP, setUpdateP] = useState(false)
     const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
 
     if (!reparacionDetail.data) return <>loading...</>
@@ -20,7 +22,9 @@ const Details = ({ params }: { params: { slug: string } }) => {
         })
         .then((res)=>res.json())
         .then((data)=>{
-            console.log(data)
+            if(data.succeeded){
+                setUpdateP(!updateP)
+            }
         })
     }
 
@@ -49,6 +53,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 <h2>Tiempo</h2>
                 <p>Fecha {allInfo.fechainicio.split(" ")[0]} </p>
                 <p>Hora Inicio: {allInfo?.fechainicio.split(" ")[1]} </p>
+                <p>Fecha {allInfo.fechafinal.split(" ")[0]} </p>
                 <p>Hora Actual: {allInfo?.fechafinal.split(" ")[1]} </p>
             </div>
 

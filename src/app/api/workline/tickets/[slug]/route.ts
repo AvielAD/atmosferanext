@@ -18,6 +18,7 @@ export async function GET(req: NextRequest, {params}: {params: {slug: string}}) 
                 .then((response) => response.json())
                 .then((userInfo) => {
                     EventosView = userInfo
+                    console.log(userInfo)
                 }).catch((error) => {
                 })
 

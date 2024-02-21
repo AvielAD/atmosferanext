@@ -42,10 +42,10 @@ const Tickets = () => {
       <table className="table w-lg-75">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Categoria</th>
-            <th scope="col">Inicio</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -55,10 +55,10 @@ const Tickets = () => {
             data.map((item: ticketdto, index: number) => {
               return (
                 <tr key={item.id}>
-                  <th scope="row">{index}</th>
                   <td>{item.nombre}</td>
                   <td>{item.category.nombre}</td>
-                  <td>{item.fechainicio?.toString().split("T")[1]}</td>
+                  <td>{item.fechainicio.split(" ")[0]}</td>
+                  <td>{item.fechainicio.split(" ")[1]}</td>
                   <td>
                     <i onClick={
                       () => router.push(`/workline/tickets/Details/${item.uuid}`)

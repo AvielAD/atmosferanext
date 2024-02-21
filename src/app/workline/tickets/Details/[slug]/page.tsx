@@ -47,14 +47,9 @@ const Details = ({ params }: { params: { slug: string } }) => {
         <div className="row">
             <div className="col-8">
                 <h2>Tiempo</h2>
-                <p>Inicio: 
-                    {allInfo?.fechainicio?.toString().split("T")[0]} 
-                    {allInfo?.fechainicio?.toString().split("T")[1]}
-                </p>
-                <p>Fin: 
-                    {allInfo?.fechafinal?.toString().split("T")[0]} 
-                    {allInfo?.fechafinal?.toString().split("T")[1]}
-                </p>
+                <p>Fecha {allInfo.fechainicio.split(" ")[0]} </p>
+                <p>Hora Inicio: {allInfo?.fechainicio.split(" ")[1]} </p>
+                <p>Hora Actual: {allInfo?.fechafinal.split(" ")[1]} </p>
             </div>
 
             <div className="col-4 text-justify">

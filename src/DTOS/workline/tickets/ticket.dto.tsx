@@ -1,7 +1,7 @@
 export interface ticketdto{
     id: number,
-    fechainicio: Date,
-    fechafinal: Date,
+    fechainicio: string,
+    fechafinal: string,
     nombre: string,
     uuid: string,
     category: categorydto,
@@ -30,8 +30,8 @@ export interface servicedto{
 }
 export interface ticketallDto{
     id: number,
-    fechainicio: Date,
-    fechafinal: Date,
+    fechainicio: string,
+    fechafinal: string,
     nombre: string,
     uuid: string,
     total: number,

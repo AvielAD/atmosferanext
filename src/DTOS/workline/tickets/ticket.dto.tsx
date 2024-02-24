@@ -35,6 +35,7 @@ export interface ticketallDto{
     nombre: string,
     uuid: string,
     total: number,
+    estado: string,
     category: categorydto,
     servicios: Array<servicedto>
 }

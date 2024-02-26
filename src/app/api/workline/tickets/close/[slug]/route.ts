@@ -3,7 +3,7 @@ import { createTicketDto, ticketdto } from "@/DTOS/workline/tickets/ticket.dto"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: NextRequest, {params}: {params: {slug: string}}) {
+export async function POST(req: NextRequest, {params}: {params: {slug: string}}) {
     let Response = {} as response
     const testcookies = cookies().get('token')
     const uuidsearch = params.slug
@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest, {params}: {params: {slug: string}}) 
     try {
         if (testcookies)
             await fetch(`https://backwl.atmosfera.la/api/tickets/${uuidsearch}`, {
-                method: "PUT",
+                method: "POST",
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`,
                     'Content-Type': 'application/json'

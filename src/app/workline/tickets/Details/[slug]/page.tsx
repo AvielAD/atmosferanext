@@ -5,7 +5,7 @@ import { ticketallDto } from "@/DTOS/workline/tickets/ticket.dto"
 import { useEffect, useState } from "react"
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
-const updateTicket = (url: string) => fetch(url,{method: 'POST'}).then(r => r.json())
+const updateTicket = (url: string) => fetch(url,{method: 'PUT'}).then(r => r.json())
 
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
@@ -39,7 +39,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 <p>Estado: {allInfo.estado}</p>
                 <p>Fecha {allInfo.fechainicio.split(" ")[0]} </p>
                 <p>Hora Inicio: {allInfo?.fechainicio.split(" ")[1]} </p>
-                <p>Minutos Transcurridos: {dataCancel?.data?.data?.minutos?.toString().split(".")[0]}</p>
+                <p>Minutos Transcurridos: {dataCancel?.data?.data?.minutos?.toString().split(".")[0] ?? 0}</p>
             </div>
 
             <div className="col-4 text-justify">

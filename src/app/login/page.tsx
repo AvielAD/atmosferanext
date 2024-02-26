@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import styles from './styles.module.scss'
 import { FormularioLogin } from '@/DTOS/FormularioLogin';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 const instanceAxios = axios.create({
     baseURL: 'https://authmodule.localfix.mx',
@@ -15,6 +16,8 @@ const instanceAxios = axios.create({
 
 const Login = () => {
     const router = useRouter()
+    const [buttonLogin, setButtonLogin] = useState(false)
+
     return (
         <>
             <div>
@@ -30,6 +33,7 @@ const Login = () => {
                                 //redirect: false,
                                 callbackUrl: '/eventos/inscrito'
                             })
+                            console.log(response)
 
                         }}
                     >

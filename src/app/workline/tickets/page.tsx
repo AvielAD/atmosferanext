@@ -38,7 +38,7 @@ const Tickets = () => {
 
   return (<>
     <h1 className='text-center'>Tickets Abiertos</h1>
-    <div className='d-flex justify-content-center'>
+    <div className='container d-flex justify-content-center'>
       <table className="table w-lg-75">
         <thead>
           <tr>

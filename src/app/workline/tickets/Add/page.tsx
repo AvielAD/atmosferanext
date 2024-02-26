@@ -28,33 +28,40 @@ const Add = () => {
     }
 
     return (<>
-        <div >
-            <Formik
-                initialValues={formTicket}
-                onSubmit={submitAdd}
-                validationSchema={addTicketSchema}
-            >
-                {
-                    (props: FormikProps<any>) => (
-                        <Form>
-                            <Field as="select" name="idcatticket" className="form-select">
-                                <option value="">Seleccionar Opcion...</option>
-                                <option value="1">Limitado</option>
-                                <option value="2">Ilimitado</option>
-                            </Field>
-                            <ErrorMessage name="idcatticket">{(msg) => (<div className="text-danger">{msg}</div>)}</ErrorMessage>
-                            <Field
-                                name="nombre"
-                                className="form-control"
-                            ></Field>
-                            <ErrorMessage name="nombre">{(msg) => (<div className="text-danger">{msg}</div>)}</ErrorMessage>
+        <div className="container mt-5">
+            <div className="row d-flex justify-content-center">
+            <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-4 col-sm-6 col-10">
+                <div className="h1 text-center">Agregar Ticket</div>
+                <Formik
+                    initialValues={formTicket}
+                    onSubmit={submitAdd}
+                    validationSchema={addTicketSchema}
+                >
+                    {
+                        (props: FormikProps<any>) => (
+                            <Form>
+                                <Field as="select" name="idcatticket" className="form-select">
+                                    <option value="">Seleccionar Opcion...</option>
+                                    <option value="1">Limitado</option>
+                                    <option value="2">Ilimitado</option>
+                                </Field>
+                                <ErrorMessage name="idcatticket">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
+                                <Field
+                                    name="nombre"
+                                    className="form-control mt-4"
+                                ></Field>
+                                <ErrorMessage name="nombre">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
 
-                            <button type="submit" className="mt-5 btn btn-primary">Agregar</button>
-                        </Form>
-                    )
-                }
+                                <div className="row d-flex justify-content-center">
+                                    <button type="submit" className="mt-5 btn btn-primary col-8">Agregar</button>
+                                </div>
+                            </Form>
+                        )
+                    }
 
-            </Formik>
+                </Formik>
+                </div>
+            </div>
         </div>
     </>)
 }

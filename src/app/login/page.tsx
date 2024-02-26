@@ -1,6 +1,6 @@
 'use client'
 
-import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
+import { Formik, Field, Form, FormikHelpers, ErrorMessage, FormikProps } from 'formik';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import styles from './styles.module.scss'
@@ -33,11 +33,10 @@ const Login = () => {
                                 //redirect: false,
                                 callbackUrl: '/eventos/inscrito'
                             })
-                            console.log(response)
 
                         }}
                     >
-                        {(props) => (
+                        {(props: FormikProps<any>) => (
                             <Form>
                                 <div className={styles.containerLogin}>
                                     <div className={styles.containerContentLogin}>
@@ -75,7 +74,9 @@ const Login = () => {
                                         <button
                                             type="submit"
                                             className={styles.FormStyleButton}
+                                            disabled={props.isSubmitting}
                                         >Iniciar Sesion</button>
+
                                     </div>
                                 </div>
 

@@ -21,7 +21,6 @@ const auth = NextAuth({
             async authorize(credentials, req) {
                 try {
                     const { email, password } = credentials as { email: "", password: "" }
-                    console.log("Email: " + email + " Password: " + password)
 
                     const response = await instanceAxios.post('/api/authenticate', {
                         email,
@@ -53,7 +52,7 @@ const auth = NextAuth({
         signIn: '/login'
     },
     session: {
-        maxAge: 4 * 60 * 60
+        maxAge: 12 * 60 * 60
     }
 })
 

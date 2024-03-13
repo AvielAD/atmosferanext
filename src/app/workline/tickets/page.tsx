@@ -39,13 +39,11 @@ const Tickets = () => {
   return (<>
     <h1 className='text-center'>Tickets Abiertos</h1>
     <div className='container d-flex justify-content-center'>
-      <table className="table w-lg-75">
+      <table className="table w-100">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Categoria</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Hora</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -57,13 +55,15 @@ const Tickets = () => {
                 <tr key={item.id}>
                   <td>{item.nombre}</td>
                   <td>{item.category.nombre}</td>
-                  <td>{item.fechainicio.split(" ")[0]}</td>
-                  <td>{item.fechainicio.split(" ")[1]}</td>
-                  <td>
+                  <td className='d-flex justify-content-evenly'>
                     <i onClick={
                       () => router.push(`/workline/tickets/Details/${item.uuid}`)
 
-                    } className='m-2 bi bi-eye'></i>
+                    } className='bi bi-eye w-50'></i>
+                    <i onClick={
+                      () => router.push(`/workline/tickets/Details/${item.uuid}`)
+
+                    } className='bi bi-qr-code w-50'></i>
                   </td>
                 </tr>
               )
@@ -75,12 +75,6 @@ const Tickets = () => {
 
     </div>
 
-    <div className={`z-1 fixed-bottom d-flex justify-content-center ${isVisibleToast ? 'd-block' : 'd-none'}`}>
-
-      <ToastPersonal message={dataResponse.message} succedded={dataResponse.succeeded}></ToastPersonal>
-
-    </div>
-    <MenuAdd url='/workline/tickets/Add'></MenuAdd>
   </>)
 }
 

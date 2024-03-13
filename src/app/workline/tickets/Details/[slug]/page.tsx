@@ -3,18 +3,22 @@
 import useSWR from "swr"
 import { ticketallDto } from "@/DTOS/workline/tickets/ticket.dto"
 import { useEffect, useState } from "react"
-
+import {DateTime} from 'luxon'
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.json())
 
+
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
+    
     const uuid = params.slug
     const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
     const dataCancel = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
 
     if (!reparacionDetail.data) return <>loading...</>
-    if (reparacionDetail.data) allInfo = reparacionDetail.data
+    if (reparacionDetail.data){ 
+        allInfo = reparacionDetail.data
+    }
 
     const closeTicket = () => {
         console.log('cerrando ticket')
@@ -27,6 +31,9 @@ const Details = ({ params }: { params: { slug: string } }) => {
             })
 
     }
+
+
+
     return (<>
         <div className="container">
             <h2 className="text-center h1 mb-5">Detalle Ticket</h2>
@@ -39,7 +46,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 <div className="col-6">
                     <h2>Costo</h2>
                     <p>Total: ${allInfo?.total} mxn</p>
-
+                    <h2>Minutos</h2>
                 </div>
 
             </div>

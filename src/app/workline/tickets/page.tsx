@@ -5,19 +5,24 @@ import { useEffect, useRef, useState } from 'react'
 import { ticketdto } from '@/DTOS/workline/tickets/ticket.dto'
 import AddTicket from '@/Components/Formularios/AddTicket/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
+import QRCode from 'react-qr-code'
+
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Tickets = () => {
   const router = useRouter()
   const [modal, setModal] = useState(false)
   const { data, error } = useSWR('/api/workline/tickets', fetcher)
-  const wrapperRef = useRef(null) as any
+  const [uuidQr, setUuidQr] = useState("")
+
   if (!data) return <>loading...</>
+  console.log(uuidQr)
   return (<>
 
     <ModalGeneral show={modal} close={()=>setModal(false)} >
       <AddTicket close={setModal}></AddTicket>
     </ModalGeneral>
+
 
     <h1 className='text-center'>Tickets Abiertos</h1>
     <div className='container d-flex justify-content-center'>
@@ -43,8 +48,7 @@ const Tickets = () => {
 
                       } className='bi bi-eye w-50'></i>
                       <i onClick={
-                        () => router.push(`/workline/tickets/Details/${item.uuid}`)
-
+                        () => setUuidQr(item.uuid)
                       } className='bi bi-qr-code w-50'></i>
                     </td>
                   </tr>

@@ -1,18 +1,34 @@
 import QrScanner from 'qr-scanner';
 import { useEffect, useRef, useState } from 'react';
 import './styles.module.scss';
+import { useRouter } from 'next/navigation';
 
 const QRScanner = () => {
   const videoElementRef = useRef(null);
+  const router = useRouter()
   const [scanned, setScannedText] = useState('');
 
+  const closeTicket = (uuid:string) => {
+    if(uuid !== '' || uuid != null)
+    fetch(`/api/workline/tickets/close/${uuid}`, {
+        method: 'POST'
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            if(data.succeeded)
+              router.push(`/workline/tickets/Details/${uuid}`)
+
+        })
+
+}
   useEffect(() => {
     const video: HTMLVideoElement = videoElementRef.current ?? new HTMLVideoElement();
     const qrScanner = new QrScanner(
       video,
       (result) => {
-        console.log('decoded qr code:', result);
-        setScannedText(result.data);
+        //setScannedText(result.data);
+        closeTicket(result.data)
       },
       {
         returnDetailedScanResult: true,
@@ -21,7 +37,6 @@ const QRScanner = () => {
       }
     );
     qrScanner.start();
-    console.log('start');
 
     return () => {
       console.log(qrScanner);

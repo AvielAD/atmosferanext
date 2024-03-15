@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react'
 import { ticketdto } from '@/DTOS/workline/tickets/ticket.dto'
 import AddTicket from '@/Components/Formularios/AddTicket/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
-import QRCode from 'react-qr-code'
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 

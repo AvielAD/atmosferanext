@@ -1,5 +1,5 @@
 export interface modaldto{
     close: Function,
     show: boolean,
-    children: string | JSX.Element
+    children: string | JSX.Element | null
 }

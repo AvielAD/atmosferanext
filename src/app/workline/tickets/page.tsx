@@ -23,7 +23,7 @@ const Tickets = () => {
     </ModalGeneral>
 
 
-    <div style={{height: "80vh"}} className='container overflow-auto'>
+    <div style={{height: "80vh"}} className='container overflow-scroll'>
       <h1 className='row text-center'>Tickets Abiertos</h1>
 
       <div className='row'>

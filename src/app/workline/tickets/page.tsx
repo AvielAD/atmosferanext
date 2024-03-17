@@ -18,14 +18,16 @@ const Tickets = () => {
   console.log(uuidQr)
   return (<>
 
-    <ModalGeneral show={modal} close={()=>setModal(false)} >
+    <ModalGeneral show={modal} close={() => setModal(false)} >
       <AddTicket close={setModal}></AddTicket>
     </ModalGeneral>
 
 
-    <h1 className='text-center'>Tickets Abiertos</h1>
-    <div className='container d-flex justify-content-center'>
+    <div style={{height: "80vh"}} className='container overflow-auto'>
+      <h1 className='row text-center'>Tickets Abiertos</h1>
+
       <div className='row'>
+
         <table className="table w-100">
           <thead >
             <tr>
@@ -46,9 +48,6 @@ const Tickets = () => {
                         () => router.push(`/workline/tickets/Details/${item.uuid}`)
 
                       } className='bi bi-eye w-50'></i>
-                      <i onClick={
-                        () => setUuidQr(item.uuid)
-                      } className='bi bi-qr-code w-50'></i>
                     </td>
                   </tr>
                 )
@@ -57,12 +56,13 @@ const Tickets = () => {
           </tbody>
         </table>
 
-        <div className='row fs-1'>
-          <i className='bi bi-plus-circle h1'
-            onClick={() => setModal(!modal)}></i>
-        </div>
       </div>
+
     </div>
+    <div className='container fixed-bottom'>
+        <i style={{fontSize: "4rem"}} className='bi bi-plus-circle h1'
+          onClick={() => setModal(!modal)}></i>
+      </div>
 
   </>)
 }

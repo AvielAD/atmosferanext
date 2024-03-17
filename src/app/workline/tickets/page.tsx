@@ -23,7 +23,7 @@ const Tickets = () => {
     </ModalGeneral>
 
 
-    <div style={{height: "80vh"}} className='container overflow-scroll'>
+    <div style={{ height: "80vh" }} className='container overflow-scroll'>
       <h1 className='row text-center'>Tickets Abiertos</h1>
 
       <div className='row'>
@@ -60,9 +60,12 @@ const Tickets = () => {
 
     </div>
     <div className='container fixed-bottom'>
-        <i style={{fontSize: "4rem"}} className='bi bi-plus-circle h1'
-          onClick={() => setModal(!modal)}></i>
-      </div>
+      <button className='btn btn-primary' onClick={() => setModal(!modal)}>
+        <i style={{ fontSize: "4rem" }} className='bi bi-plus-circle h1'
+        ></i>
+
+      </button>
+    </div>
 
   </>)
 }

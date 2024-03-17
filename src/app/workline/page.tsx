@@ -13,18 +13,14 @@ const Page = () => {
         <ModalGeneral show={modal} close={() => setModal(false)} >
             {qrscanner}
         </ModalGeneral>
-        <div style={{ height: "100vh" }} className="container">
+        <div className="container fixed-bottom">
             <div className="row w-100 h-100">
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="">
                     <button className="btn btn-primary" onClick={() => setModal(!modal)}>
                         <i style={{ fontSize: "3rem" }} className="bi bi-camera"></i>
                     </button>
-
                 </div>
-
             </div>
-
-
         </div>
     </>)
 }

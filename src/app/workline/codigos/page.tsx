@@ -63,7 +63,8 @@ const Tickets = () => {
                         <QrPrint subject='Codigo de Descuento' ref={(el)=>{componentRef.current[index]=el}} uuidqr={item.uuidkey}></QrPrint>
                     </td>
                     <td>
-                      <button className='btn btn-primary'>
+                      <button className='btn btn-primary'> 
+                      {index}
                       <i
                       onClick={()=>{handlePrint(null, () => componentRef.current[index])}} 
                       className="bi bi-qr-code"></i>

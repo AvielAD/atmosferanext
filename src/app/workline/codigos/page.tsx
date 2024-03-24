@@ -9,8 +9,7 @@ import { codigodescuento } from '@/DTOS/codigo/codigo.dto'
 import { codigosdescuentodto } from '@/DTOS/workline/codigos/codigos.dto'
 import { DateTime } from 'luxon'
 import QrPrint from '@/Components/TicketsPrint/QrTicketPrint/page'
-import { useReactToPrint } from 'react-to-print'
-
+import ReactToPrint from 'react-to-print'
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Tickets = () => {
@@ -18,19 +17,21 @@ const Tickets = () => {
   const [modal, setModal] = useState(false)
   //const componentRef = useRef<HTMLDivElement>(null);
   const componentRef = useRef<(HTMLDivElement | null)[]>([]);
+  const componentClickRef = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const handlePrint= useReactToPrint({
-    documentTitle: "Print This Document",
-    onBeforePrint: () => console.log("before printing..."),
-    onAfterPrint: () => console.log("after printing..."),
-    removeAfterPrint: true,  })
   const { data, error } = useSWR('/api/workline/codigos', fetcher)
+
+  const printTicket = (index: number) => {
+    if (componentRef.current) {
+      componentRef.current[index]?.click()
+    }
+  }
 
   if (!data) return <>loading...</>
 
   return (<>
     <h1 className='text-center'>Codigos Descuento</h1>
-   
+
     <ModalGeneral show={modal} close={() => setModal(false)} >
       <AddCodigo close={setModal}></AddCodigo>
     </ModalGeneral>
@@ -45,7 +46,6 @@ const Tickets = () => {
             <tr>
               <th scope="col">Codigo</th>
               <th scope="col">Vencimiento</th>
-              <th scope="col">Categoria</th>
               <th scope="col">Descuento</th>
               <th scope="col">QR</th>
             </tr>
@@ -57,19 +57,15 @@ const Tickets = () => {
                   <tr key={item.id}>
                     <td>{item.nombre}</td>
                     <td>{DateTime.fromISO(item.fechavigencia.toString()).toLocaleString(DateTime.DATE_MED)}</td>
-                    <td>{item.idcatcodigo}</td>
                     <td>{item.descuento} %</td>
-                    <td className='d-none'>
-                        <QrPrint subject='Codigo de Descuento' ref={(el)=>{componentRef.current[index]=el}} uuidqr={item.uuidkey}></QrPrint>
-                    </td>
-                    <td>
-                      <button className='btn btn-primary'> 
-                      {index}
-                      <i
-                      onClick={()=>{handlePrint(null, () => componentRef.current[index])}} 
-                      className="bi bi-qr-code"></i>
-
-                      </button>
+                    <td className=''>
+                      <ReactToPrint key={index + 100}
+                        trigger={() => <button name={"button: " + index} ref={(el) => componentClickRef.current[index] = el}>Click</button>}
+                        content={() => componentRef.current[index]}
+                      />
+                      <div className='d-none'>
+                        <QrPrint subject='Codigo de Descuento' ref={(el) => { componentRef.current[index] = el }} uuidqr={item.uuidkey}></QrPrint>
+                      </div>
                     </td>
                   </tr>
                 )

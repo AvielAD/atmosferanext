@@ -60,7 +60,7 @@ const Tickets = () => {
                     <td>{item.descuento} %</td>
                     <td className=''>
                       <ReactToPrint key={index + 100}
-                        trigger={() => <button name={"button: " + index} ref={(el) => componentClickRef.current[index] = el}>Click</button>}
+                        trigger={() => <button className='btn btn-primary' name={"button: " + index} ref={(el) => componentClickRef.current[index] = el}> <i className='bi bi-qr-code'></i> </button>}
                         content={() => componentRef.current[index]}
                       />
                       <div className='d-none'>

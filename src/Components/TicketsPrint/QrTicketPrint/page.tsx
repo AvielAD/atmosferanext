@@ -4,10 +4,11 @@ import QRCode from 'react-qr-code'
 import { ticketqr } from '@/DTOS/TicketsPrint/ticketsprint.dto'
 const Page = React.forwardRef<HTMLDivElement, ticketqr>((props, ref) => {
   return (
-    <div ref={ref} className={styles.container}>
+    <div key={props.uuidqr} ref={ref} className={styles.container}>
       <div className={styles.containerContent}>
         <div>
           <h1 className={styles.mainTitle}>WorkLine</h1>
+          <h2>{props.subject}</h2>
           <p>Cowork</p>
           <p>Chapulco 26, la Paz</p>
         </div>
@@ -24,6 +25,6 @@ const Page = React.forwardRef<HTMLDivElement, ticketqr>((props, ref) => {
     </div>
   )
 })
-Page.displayName='PromocionalLocalFix'
+Page.displayName='Promocional WorkLine'
 
 export default Page

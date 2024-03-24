@@ -31,7 +31,7 @@ const Login = () => {
                                 email: values.email,
                                 password: values.passkey,
                                 //redirect: false,
-                                callbackUrl: '/eventos/inscrito'
+                                callbackUrl: '/workline'
                             })
 
                         }}

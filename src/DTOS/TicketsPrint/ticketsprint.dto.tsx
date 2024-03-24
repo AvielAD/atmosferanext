@@ -1,5 +1,7 @@
+
 export interface ticketqr{
-    uuidqr: string
+    uuidqr: string,
+    subject: string
 }
 
 export interface ticketdetails{

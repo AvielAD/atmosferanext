@@ -49,7 +49,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
     return (<>
         <div className="d-none">
-            <QrPrint ref={componentRef} uuidqr={allInfo?.uuid}></QrPrint>
+            <QrPrint ref={componentRef} uuidqr={allInfo?.uuid} subject="Seguimiento Consumo"></QrPrint>
         </div>
         <div className="d-none">
             <TicketPrint ref={componentRef2}

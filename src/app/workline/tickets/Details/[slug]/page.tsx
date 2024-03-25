@@ -48,7 +48,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
 
-    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id}/> : null
+    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id} closemodal={setModal}/> : null
 
 
 

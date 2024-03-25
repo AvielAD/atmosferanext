@@ -20,7 +20,7 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
       
       updateFetcher('/api/workline/codigos/assign', newAssign).then((data) => {
         if (data.succeeded){
-          router.push(`/workline/tickets/Details/${assignprops.uuidticket}`)
+          assignprops.closemodal(false)
         }
         else
           setScannedText(uuid+ JSON.stringify(newAssign)+ JSON.stringify(data));

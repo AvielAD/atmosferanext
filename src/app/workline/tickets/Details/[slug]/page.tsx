@@ -63,26 +63,20 @@ const Details = ({ params }: { params: { slug: string } }) => {
         </div>
         <div className="container">
             <h2 className="text-center h1 mb-5">Detalle Ticket</h2>
+
             <div className="row">
-                <div className="col-4">
+
+                <div className="col-6">
                     <h2>Cliente</h2>
                     <p>Nombre: {allInfo?.nombre}</p>
                 </div>
 
-                <div className="col-4">
+                <div className="col-6">
                     <h2>Costo</h2>
                     <p>Total: ${allInfo?.total} mxn</p>
                 </div>
-                <div className="col-4">
-                    <h2 className="text-center">Acciones</h2>
-                    <div className="row">
-                        <div className="d-flex justify-content-evenly">
-                            <i className="bi bi-qr-code" onClick={handlePrint}></i>
-                            <i className="bi bi-printer" onClick={handlePrint2}></i>
-                        </div>
-                    </div>
-                </div>
             </div>
+
             <div className="row">
                 <div className="col-8">
                     <h2>Tiempo</h2>
@@ -92,21 +86,47 @@ const Details = ({ params }: { params: { slug: string } }) => {
                     <p>Minutos Transcurridos: {dataCancel?.data?.data?.minutos?.toString().split(".")[0] ?? 0}</p>
                 </div>
 
-                <div className="col-4 text-justify">
+                <div className="col-4">
                     <h2>Plan</h2>
                     <p>{allInfo?.category.nombre}</p>
-
                 </div>
 
-                <div className="mt-5 d-flex justify-content-center " >
-                    <i className="fs-1 bi bi-sign-stop-fill"
-                        onClick={() => closeTicket()}
-
-                    ></i>
-
-                </div>
             </div>
+            <div className="row gx-1 gy-1">
+                <h2 className="text-center">Acciones</h2>
 
+                <div className="col-6">
+                    <button className="btn btn-success w-100">
+                        <i style={{ fontSize: '2rem' }} className="bi bi-qr-code" onClick={handlePrint}></i>
+                        <p>QR</p>
+                    </button>
+                </div>
+
+
+                <div className="col-6">
+                    <button className="btn btn-primary w-100">
+                        <i style={{ fontSize: '2rem' }} className="bi bi-printer" onClick={handlePrint2}></i>
+                        <p>Ticket</p>
+                    </button>
+
+                </div>
+
+                <div className="col-6">
+                    <button className="btn btn-secondary w-100">
+                        <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={handlePrint2}></i>
+                        <p>Cupon</p>
+                    </button>
+                </div>
+
+                <div className="col-6">
+                    <button className="btn btn-danger w-100">
+                        <i style={{ fontSize: '2rem'}} className="bi bi-sign-stop-fill" onClick={() => closeTicket()}></i>
+                        <p>Cerrar</p>
+                    </button>
+                </div>
+
+
+            </div>
         </div>
     </>)
 }

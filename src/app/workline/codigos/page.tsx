@@ -36,11 +36,9 @@ const Tickets = () => {
       <AddCodigo close={setModal}></AddCodigo>
     </ModalGeneral>
 
-
     <div style={{ height: "80vh" }} className='container overflow-scroll'>
 
       <div className='row'>
-
         <table className="table w-100">
           <thead >
             <tr>

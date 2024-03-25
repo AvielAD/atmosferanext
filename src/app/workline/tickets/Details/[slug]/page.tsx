@@ -125,7 +125,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
                 <div className="col-6">
                     <button className="btn btn-secondary w-100" disabled={allInfo.estado == "Finalizado"}>
-                        <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={handlePrint2}></i>
+                        <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={() => setModal(true)}></i>
                         <p>Cupon</p>
                     </button>
                 </div>

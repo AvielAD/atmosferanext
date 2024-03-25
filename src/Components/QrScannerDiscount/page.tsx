@@ -21,6 +21,9 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
         if (data.succeeded){
           router.push(`/workline/tickets/Details/${assignprops.uuidticket}`)
         }
+        else
+          setScannedText(uuid);
+
     })
     }
 

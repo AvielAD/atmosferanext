@@ -1,6 +1,5 @@
 import { codigodescuento } from "@/DTOS/codigo/codigo.dto";
 import { response } from "@/DTOS/response/response";
-import { createTicketDto, ticketdto } from "@/DTOS/workline/tickets/ticket.dto"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,7 +8,7 @@ export async function GET() {
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
-            await fetch('https://backwl.atmosfera.la/api/codigos', {
+            await fetch('https://backwl.atmosfera.la/api/codigos/', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`

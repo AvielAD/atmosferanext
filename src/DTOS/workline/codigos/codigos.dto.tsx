@@ -14,9 +14,7 @@ export interface codigosdescuentoinputdto{
     nombre: string,
     descripcion: string,
     fechavigencia: Date,
-    uuidkey: string,
     replicas: number,
-    terminado: boolean,
     idcatcodigo: number,
     descuento: number
 }

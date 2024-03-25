@@ -1,13 +1,13 @@
 'use client'
 import { adddto } from "@/DTOS/formularios/form.dto";
-import { codigosdescuentodto, codigosdescuentoformdto } from "@/DTOS/workline/codigos/codigos.dto";
+import { codigosdescuentodto, codigosdescuentoformdto, codigosdescuentoinputdto } from "@/DTOS/workline/codigos/codigos.dto";
 import { createTicketDto, createTicketFormDto } from "@/DTOS/workline/tickets/ticket.dto";
 import { Field, Form, Formik, FormikProps, ErrorMessage, FieldProps } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { date, number, object, string } from 'yup';
 
-const addFetcher = async (url: string, data: createTicketDto) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
+const addFetcher = async (url: string, data: codigosdescuentoinputdto) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
 
 const Add = (props: adddto) => {
     const router = useRouter()
@@ -16,26 +16,44 @@ const Add = (props: adddto) => {
         nombre: '',
         descripcion: '',
         fechavigencia: '',
-        uuidkey: '',
-        replicas: '',
-        terminado: '',
+        replicas: '1',
         idcatcodigo: '',
         descuento: ''
     } as codigosdescuentoformdto
 
     const submitAdd = async (values: codigosdescuentoformdto) => {
-        /*        const newTicket = {
-                    idcatticket: parseInt(values.idcatticket),
-                    nombre: values.nombre
-                } as createTicketDto
+            if(values.idcatcodigo == "1"){
+                const newCodigo = {
+                    idcatcodigo: parseInt(values.idcatcodigo),
+                    nombre: values.nombre,
+                    descripcion: values.descripcion,
+                    fechavigencia: new Date(values.fechavigencia),
+                    replicas: parseInt(values.replicas),
+                    descuento: parseFloat(values.descuento)
+                } as codigosdescuentoinputdto
         
-                addFetcher('/api/workline/tickets', newTicket).then((data) => {
+                addFetcher('/api/workline/codigos/normal', newCodigo).then((data) => {
                     if (data.succeeded){
-                        console.log('Response ok')
                         props.close(false)
                     }
-                })*/
-
+                })
+            }
+            else if(values.idcatcodigo == "2"){
+                const newCodigo = {
+                    idcatcodigo: parseInt(values.idcatcodigo),
+                    nombre: values.nombre,
+                    replicas: parseInt(values.idcatcodigo),
+                    descripcion: values.descripcion,
+                    fechavigencia: new Date(values.fechavigencia),
+                    descuento: parseFloat(values.descuento)
+                } as codigosdescuentoinputdto
+        
+                addFetcher('/api/workline/codigos/daypass', newCodigo).then((data) => {
+                    if (data.succeeded){
+                        props.close(false)
+                    }
+                })
+            }
 
     }
 
@@ -90,12 +108,13 @@ const Add = (props: adddto) => {
                                     ></Field>
                                     <ErrorMessage name="fechavigencia">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
                                     
-                                    <label className={`w-100 ${props.values.idcatcodigo=="2"? "visually-hidden": ""}`}>
+                                    <label className={`w-100`}>
                                         Replicas:
                                         <Field
                                             name="replicas"
                                             className="form-control"
                                             disabled={props.values.idcatcodigo==="2"}
+                                            
                                         ></Field>
                                         <ErrorMessage name="replicas">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
 
@@ -111,7 +130,7 @@ const Add = (props: adddto) => {
                                     </label>
 
                                     <div className="row d-flex justify-content-center">
-                                        <button type="submit" className="btn btn-primary col-8">Agregar</button>
+                                        <button type="submit" className="btn btn-secondary col-8">Agregar</button>
                                     </div>
                                 </Form>
                             )
@@ -132,7 +151,6 @@ const addTicketSchema = object({
     descripcion: string().required('Campo Requerido'),
     fechavigencia: date().required('Campo Requerido'),
     replicas: number().min(1, 'Minimo instancias').typeError('valor no permitido').required('Campo Requerido'),
-    terminado: string().required('Campo Requerido'),
     descuento: number().min(1, 'El valor no puede ser negativo').typeError('valor no permitido').required('Campo Requerido'),
     idcatcodigo: number().min(1, 'Seleccione una Opcion').typeError('Seleccione una Opcion').required('Seleccione una opcion'),
 })

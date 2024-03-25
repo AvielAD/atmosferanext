@@ -108,7 +108,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 <h2 className="text-center">Acciones</h2>
 
                 <div className="col-6">
-                    <button className="btn btn-success w-100">
+                    <button className="btn btn-success w-100" disabled={allInfo.estado == "Finalizado"}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-qr-code" onClick={handlePrint}></i>
                         <p>QR</p>
                     </button>
@@ -116,7 +116,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
 
                 <div className="col-6">
-                    <button className="btn btn-primary w-100">
+                    <button className="btn btn-primary w-100" disabled={allInfo.estado !== "Finalizado"}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-printer" onClick={handlePrint2}></i>
                         <p>Ticket</p>
                     </button>
@@ -124,14 +124,14 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 </div>
 
                 <div className="col-6">
-                    <button className="btn btn-secondary w-100">
+                    <button className="btn btn-secondary w-100" disabled={allInfo.estado == "Finalizado"}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={handlePrint2}></i>
                         <p>Cupon</p>
                     </button>
                 </div>
 
                 <div className="col-6">
-                    <button className="btn btn-danger w-100">
+                    <button className="btn btn-danger w-100" disabled={allInfo.estado == "Finalizado"}>
                         <i style={{ fontSize: '2rem'}} className="bi bi-sign-stop-fill" onClick={() => closeTicket()}></i>
                         <p>Cerrar</p>
                     </button>

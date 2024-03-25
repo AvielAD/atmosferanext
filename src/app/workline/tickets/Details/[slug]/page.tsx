@@ -7,13 +7,16 @@ import { DateTime } from 'luxon'
 import { useReactToPrint } from "react-to-print"
 import QrPrint from '@/Components/TicketsPrint/QrTicketPrint/page'
 import TicketPrint from '@/Components/TicketsPrint/DetailsTicketPrint/page'
+import QrScannerDiscount from '@/Components/QrScannerDiscount/page'
+import ModalGeneral from '@/Components/ModalGeneral/page'
+
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.json())
 
 
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
-
+    const [modal, setModal] = useState(false)
     const uuid = params.slug
     const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
     const dataCancel = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
@@ -46,11 +49,20 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
 
+    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid}/> : null
+
+
 
     return (<>
         <div className="d-none">
             <QrPrint ref={componentRef} uuidqr={allInfo?.uuid} subject="Seguimiento Consumo"></QrPrint>
         </div>
+
+        <ModalGeneral show={modal} close={() => setModal(false)} >
+            {qrscanner}
+        </ModalGeneral>
+
+
         <div className="d-none">
             <TicketPrint ref={componentRef2}
                 cliente={allInfo.nombre}

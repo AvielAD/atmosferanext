@@ -27,3 +27,10 @@ export interface codigosdescuentoformdto{
     descuento: string
 }
 
+export interface assigndcodigodto{
+    idcodigouuid: string,
+    idticket: number
+}
+export interface assignpropdto{
+    uuidticket: string
+}

@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest) {
     try {
         if (testcookies)
             await fetch('https://backwl.atmosfera.la/api/assigncode', {
-                method: "POST",
+                method: "PUT",
                 body: JSON.stringify(data),
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`,

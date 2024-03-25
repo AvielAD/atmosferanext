@@ -37,7 +37,6 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
     const closeTicket = () => {
-        console.log('cerrando ticket')
         fetch(`/api/workline/tickets/close/${uuid}`, {
             method: 'POST'
         })
@@ -49,7 +48,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
 
-    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid}/> : null
+    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id}/> : null
 
 
 

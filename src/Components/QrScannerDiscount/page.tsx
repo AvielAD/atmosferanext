@@ -14,7 +14,8 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
   const AssignDiscount = (uuid:string) => {
     if(uuid !== '' || uuid != null){
       let newAssign = {
-
+        idcodigouuid: uuid,
+        idticket: assignprops.idticket
       }as assigndcodigodto
       
       updateFetcher('/api/workline/codigos/assign', newAssign).then((data) => {

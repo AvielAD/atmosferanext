@@ -32,5 +32,6 @@ export interface assigndcodigodto{
     idticket: number
 }
 export interface assignpropdto{
-    uuidticket: string
+    uuidticket: string,
+    idticket: number
 }

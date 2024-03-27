@@ -52,7 +52,7 @@ const QRScanner = () => {
   return (
     <div>
       <div className="videoWrapper">
-        <video className="qrVideo" height={500} width={300} ref={videoElementRef} />
+        <video className="qrVideo" height={400} width={250} ref={videoElementRef} />
       </div>
       <p className="scannedText">SCANNED: {scanned}</p>
     </div>

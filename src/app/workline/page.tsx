@@ -11,17 +11,21 @@ const Page = () => {
         showModal: false,
         triggerToast: false,
         serverresponse: {} as response
-      } as addDatadto)
+    } as addDatadto)
     const qrscanner = modal ? <QrScanner /> : null
 
     return (<>
-        <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
+        <ModalGeneral showModal={dataForm.showModal} close={() => setDataForm({ ...dataForm, showModal: false, triggerToast: true })} >
             {qrscanner}
         </ModalGeneral>
         <div className="container fixed-bottom">
             <div className="row w-100 h-100">
                 <div className="">
-                    <button className="btn btn-primary" onClick={() => setModal(!modal)}>
+                    <button className="btn btn-primary" onClick={() =>
+                        setDataForm({
+                            ...dataForm,
+                            showModal: true
+                        })}>
                         <i style={{ fontSize: "3rem" }} className="bi bi-camera"></i>
                     </button>
                 </div>

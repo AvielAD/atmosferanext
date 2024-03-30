@@ -23,7 +23,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
         showModal: false,
         triggerToast: false,
         serverresponse: {} as response
-      } as addDatadto)
+    } as addDatadto)
     const uuid = params.slug
     const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
     const dataCancel = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
@@ -55,7 +55,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
 
-    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id} closemodal={setModal}/> : null
+    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id} closemodal={setModal} /> : null
 
 
 
@@ -64,14 +64,14 @@ const Details = ({ params }: { params: { slug: string } }) => {
             <QrPrint ref={componentRef} uuidqr={allInfo?.uuid} subject="Seguimiento Consumo"></QrPrint>
         </div>
 
-        <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
+        <ModalGeneral showModal={dataForm.showModal} close={() => setDataForm({ ...dataForm, showModal: false, triggerToast: true })} >
             {qrscanner}
         </ModalGeneral>
 
         <Toast show={dataForm.triggerToast}
-        close={()=>setDataForm({...dataForm,triggerToast: false})}
-        serverresponse={dataForm.serverresponse}></Toast>
-        
+            close={() => setDataForm({ ...dataForm, triggerToast: false })}
+            serverresponse={dataForm.serverresponse}></Toast>
+
         <div className="d-none">
             <TicketPrint ref={componentRef2}
                 cliente={allInfo.nombre}
@@ -134,14 +134,18 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
                 <div className="col-6">
                     <button className="btn btn-secondary w-100" disabled={allInfo.estado == "Finalizado"}>
-                        <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={() => setModal(true)}></i>
+                        <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={() =>
+                            setDataForm({
+                                ...dataForm,
+                                showModal: true
+                            })}></i>
                         <p>Cupon</p>
                     </button>
                 </div>
 
                 <div className="col-6">
                     <button className="btn btn-danger w-100" disabled={allInfo.estado == "Finalizado"}>
-                        <i style={{ fontSize: '2rem'}} className="bi bi-sign-stop-fill" onClick={() => closeTicket()}></i>
+                        <i style={{ fontSize: '2rem' }} className="bi bi-sign-stop-fill" onClick={() => closeTicket()}></i>
                         <p>Cerrar</p>
                     </button>
                 </div>

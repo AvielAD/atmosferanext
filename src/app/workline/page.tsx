@@ -2,15 +2,20 @@
 import { useState } from "react"
 import ModalGeneral from '@/Components/ModalGeneral/page'
 import QrScanner from '@/Components/QrScanner/page'
+import { addDatadto } from "@/DTOS/formularios/form.dto"
+import { response } from "@/DTOS/response/response"
 
 const Page = () => {
-    const [data, setData] = useState('')
     const [modal, setModal] = useState(false)
-
+    const [dataForm, setDataForm] = useState({
+        showModal: false,
+        triggerToast: false,
+        serverresponse: {} as response
+      } as addDatadto)
     const qrscanner = modal ? <QrScanner /> : null
 
     return (<>
-        <ModalGeneral show={modal} close={() => setModal(false)} >
+        <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
             {qrscanner}
         </ModalGeneral>
         <div className="container fixed-bottom">

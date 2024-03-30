@@ -73,7 +73,6 @@ const Evento = () => {
             <MenuAdd url='/eventos/evento/Add'></MenuAdd>
             <div className={`z-1 fixed-bottom d-flex justify-content-center ${isVisibleToast ? 'd-block' : 'd-none'}`}>
 
-<ToastPersonal message={dataResponse.message} succedded={dataResponse.succeeded}></ToastPersonal>
 
 </div>
 

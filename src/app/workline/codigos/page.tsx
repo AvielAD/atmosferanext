@@ -1,20 +1,26 @@
 'use client'
 import useSWR from 'swr'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
-import { ticketdto } from '@/DTOS/workline/tickets/ticket.dto'
+import {  useRef, useState } from 'react'
 import AddCodigo from '@/Components/Formularios/AddCodigo/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
-import { codigodescuento } from '@/DTOS/codigo/codigo.dto'
 import { codigosdescuentodto } from '@/DTOS/workline/codigos/codigos.dto'
 import { DateTime } from 'luxon'
 import QrPrint from '@/Components/TicketsPrint/QrTicketPrint/page'
 import ReactToPrint from 'react-to-print'
+import { response } from '@/DTOS/response/response'
+import { addDatadto } from '@/DTOS/formularios/form.dto'
+import Toast from '@/Components/Toast'
+
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Tickets = () => {
   const router = useRouter()
-  const [modal, setModal] = useState(false)
+  const [dataForm, setDataForm] = useState({
+    showModal: false,
+    triggerToast: false,
+    serverresponse: {} as response
+  } as addDatadto)
   //const componentRef = useRef<HTMLDivElement>(null);
   const componentRef = useRef<(HTMLDivElement | null)[]>([]);
   const componentClickRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -32,8 +38,8 @@ const Tickets = () => {
   return (<>
     <h1 className='text-center'>Codigos Descuento</h1>
 
-    <ModalGeneral show={modal} close={() => setModal(false)} >
-      <AddCodigo close={setModal}></AddCodigo>
+    <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
+      <AddCodigo dataform={dataForm} close={setDataForm}></AddCodigo>
     </ModalGeneral>
 
     <div style={{ height: "80vh" }} className='container overflow-scroll'>
@@ -76,11 +82,20 @@ const Tickets = () => {
 
     </div>
     <div className='container fixed-bottom'>
-      <button className='btn btn-primary' onClick={() => setModal(!modal)}>
-        <i style={{ fontSize: "4rem" }} className='bi bi-plus-circle h1'
+      <button className='btn btn-primary' onClick={() =>
+          setDataForm({
+            ...dataForm,
+            showModal: true
+          })}>
+        <i style={{ fontSize: "3rem" }} className='bi bi-plus-circle h1'
         ></i>
 
       </button>
+
+      <Toast show={dataForm.triggerToast}
+        close={()=>setDataForm({...dataForm,triggerToast: false})}
+        serverresponse={dataForm.serverresponse}></Toast>
+
     </div>
 
   </>)

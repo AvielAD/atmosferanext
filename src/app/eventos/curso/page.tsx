@@ -77,7 +77,6 @@ const Curso = () => {
 
     <div className={`z-1 fixed-bottom d-flex justify-content-center ${isVisibleToast ? 'd-block' : 'd-none'}`}>
 
-      <ToastPersonal message={dataResponse.message} succedded={dataResponse.succeeded}></ToastPersonal>
 
     </div>
     <MenuAdd url='/eventos/curso/Add'></MenuAdd>

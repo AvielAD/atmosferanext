@@ -1,7 +1,6 @@
 'use client'
-import { adddto } from "@/DTOS/formularios/form.dto";
-import { codigosdescuentodto, codigosdescuentoformdto, codigosdescuentoinputdto } from "@/DTOS/workline/codigos/codigos.dto";
-import { createTicketDto, createTicketFormDto } from "@/DTOS/workline/tickets/ticket.dto";
+import { addDataPropsFormDto, adddto } from "@/DTOS/formularios/form.dto";
+import { codigosdescuentoformdto, codigosdescuentoinputdto } from "@/DTOS/workline/codigos/codigos.dto";
 import { Field, Form, Formik, FormikProps, ErrorMessage, FieldProps } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,9 +8,9 @@ import { date, number, object, string } from 'yup';
 
 const addFetcher = async (url: string, data: codigosdescuentoinputdto) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
 
-const Add = (props: adddto) => {
+const Add = (props: addDataPropsFormDto) => {
     const router = useRouter()
-    const [disabledForm, setDisabledForm]=useState(false)
+    const [disabledForm, setDisabledForm] = useState(false)
     const formTicket = {
         nombre: '',
         descripcion: '',
@@ -22,46 +21,58 @@ const Add = (props: adddto) => {
     } as codigosdescuentoformdto
 
     const submitAdd = async (values: codigosdescuentoformdto) => {
-            if(values.idcatcodigo == "1"){
-                const newCodigo = {
-                    idcatcodigo: parseInt(values.idcatcodigo),
-                    nombre: values.nombre,
-                    descripcion: values.descripcion,
-                    fechavigencia: new Date(values.fechavigencia),
-                    replicas: parseInt(values.replicas),
-                    descuento: parseFloat(values.descuento)
-                } as codigosdescuentoinputdto
-        
-                addFetcher('/api/workline/codigos/normal', newCodigo).then((data) => {
-                    if (data.succeeded){
-                        props.close(false)
-                    }
+        if (values.idcatcodigo == "1") {
+            const newCodigo = {
+                idcatcodigo: parseInt(values.idcatcodigo),
+                nombre: values.nombre,
+                descripcion: values.descripcion,
+                fechavigencia: new Date(values.fechavigencia),
+                replicas: parseInt(values.replicas),
+                descuento: parseFloat(values.descuento)
+            } as codigosdescuentoinputdto
+
+            addFetcher('/api/workline/codigos/normal', newCodigo).then((data) => {
+                props.close({
+                    ...props.dataform,
+                    serverresponse: {
+                        message: data.message,
+                        succeeded: data.succeeded
+                    },
+                    triggerToast: true,
+                    showModal: false
                 })
-            }
-            else if(values.idcatcodigo == "2"){
-                const newCodigo = {
-                    idcatcodigo: parseInt(values.idcatcodigo),
-                    nombre: values.nombre,
-                    replicas: parseInt(values.idcatcodigo),
-                    descripcion: values.descripcion,
-                    fechavigencia: new Date(values.fechavigencia),
-                    descuento: parseFloat(values.descuento)
-                } as codigosdescuentoinputdto
-        
-                addFetcher('/api/workline/codigos/daypass', newCodigo).then((data) => {
-                    if (data.succeeded){
-                        props.close(false)
-                    }
+            })
+        }
+        else if (values.idcatcodigo == "2") {
+            const newCodigo = {
+                idcatcodigo: parseInt(values.idcatcodigo),
+                nombre: values.nombre,
+                replicas: parseInt(values.idcatcodigo),
+                descripcion: values.descripcion,
+                fechavigencia: new Date(values.fechavigencia),
+                descuento: parseFloat(values.descuento)
+            } as codigosdescuentoinputdto
+
+            addFetcher('/api/workline/codigos/daypass', newCodigo).then((data) => {
+                props.close({
+                    ...props.dataform,
+                    serverresponse: {
+                        message: data.message,
+                        succeeded: data.succeeded
+                    },
+                    triggerToast: true,
+                    showModal: false
                 })
-            }
+            })
+        }
 
     }
 
     return (<>
-        <div className="container mt-5">
+        <div className="container">
             <div className="row d-flex justify-content-center">
                 <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-4 col-sm-6 col-10">
-                    <div className="h3 text-center">Agregar Codigo</div>
+                    <div className="h4 text-center">Agregar Codigo</div>
                     <Formik
                         initialValues={formTicket}
                         onSubmit={submitAdd}
@@ -99,7 +110,7 @@ const Add = (props: adddto) => {
                                         ></Field>
                                         <ErrorMessage name="descripcion">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
                                     </label>
-                                    
+
                                     <Field
                                         name="fechavigencia"
                                         className="form-control"
@@ -107,14 +118,14 @@ const Add = (props: adddto) => {
                                         label="Vencimiento"
                                     ></Field>
                                     <ErrorMessage name="fechavigencia">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
-                                    
+
                                     <label className={`w-100`}>
                                         Replicas:
                                         <Field
                                             name="replicas"
                                             className="form-control"
-                                            disabled={props.values.idcatcodigo==="2"}
-                                            
+                                            disabled={props.values.idcatcodigo === "2"}
+
                                         ></Field>
                                         <ErrorMessage name="replicas">{(msg) => (<div className="text-danger text-center">{msg}</div>)}</ErrorMessage>
 

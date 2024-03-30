@@ -2,13 +2,14 @@
 
 import useSWR from "swr"
 import { ticketallDto } from "@/DTOS/workline/tickets/ticket.dto"
-import { useEffect, useRef, useState } from "react"
-import { DateTime } from 'luxon'
+import { useRef, useState } from "react"
 import { useReactToPrint } from "react-to-print"
 import QrPrint from '@/Components/TicketsPrint/QrTicketPrint/page'
 import TicketPrint from '@/Components/TicketsPrint/DetailsTicketPrint/page'
 import QrScannerDiscount from '@/Components/QrScannerDiscount/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
+import { response } from "@/DTOS/response/response"
+import { addDatadto } from "@/DTOS/formularios/form.dto"
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.json())
@@ -17,6 +18,11 @@ const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
     const [modal, setModal] = useState(false)
+    const [dataForm, setDataForm] = useState({
+        showModal: false,
+        triggerToast: false,
+        serverresponse: {} as response
+      } as addDatadto)
     const uuid = params.slug
     const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
     const dataCancel = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
@@ -57,7 +63,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
             <QrPrint ref={componentRef} uuidqr={allInfo?.uuid} subject="Seguimiento Consumo"></QrPrint>
         </div>
 
-        <ModalGeneral show={modal} close={() => setModal(false)} >
+        <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
             {qrscanner}
         </ModalGeneral>
 

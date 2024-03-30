@@ -1,12 +1,12 @@
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server";
 import { response } from "@/DTOS/response/response";
-import { assigndcodigodto, codigosdescuentoinputdto } from "@/DTOS/workline/codigos/codigos.dto";
+import { assigndcodigoinputdto, codigosdescuentoinputdto } from "@/DTOS/workline/codigos/codigos.dto";
 
 export async function PUT(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
-    const data:assigndcodigodto = await req.json()
+    const data:assigndcodigoinputdto = await req.json()
     
     try {
         if (testcookies)

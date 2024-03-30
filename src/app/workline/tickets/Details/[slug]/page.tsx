@@ -10,6 +10,7 @@ import QrScannerDiscount from '@/Components/QrScannerDiscount/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
 import { response } from "@/DTOS/response/response"
 import { addDatadto } from "@/DTOS/formularios/form.dto"
+import Toast from "@/Components/Toast"
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.json())
@@ -67,7 +68,10 @@ const Details = ({ params }: { params: { slug: string } }) => {
             {qrscanner}
         </ModalGeneral>
 
-
+        <Toast show={dataForm.triggerToast}
+        close={()=>setDataForm({...dataForm,triggerToast: false})}
+        serverresponse={dataForm.serverresponse}></Toast>
+        
         <div className="d-none">
             <TicketPrint ref={componentRef2}
                 cliente={allInfo.nombre}

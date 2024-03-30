@@ -2,34 +2,37 @@ import QrScanner from 'qr-scanner';
 import { useEffect, useRef, useState } from 'react';
 import './styles.module.scss';
 import { useRouter } from 'next/navigation';
-import { assigndcodigodto, assignpropdto } from '@/DTOS/workline/codigos/codigos.dto';
+import { assigndcodigoinputdto, assignpropdto } from '@/DTOS/workline/codigos/codigos.dto';
 
-const updateFetcher = async (url: string, data: assigndcodigodto) => fetch(url, { method: "PUT", body: JSON.stringify(data) }).then(r => r.json())
+const updateFetcher = async (url: string, data: assigndcodigoinputdto) => fetch(url, { method: "PUT", body: JSON.stringify(data) }).then(r => r.json())
 
 const QRScannerDiscount = (assignprops: assignpropdto) => {
   const videoElementRef = useRef(null);
   const router = useRouter()
   const [scanned, setScannedText] = useState('');
 
-  const AssignDiscount = (uuid:string) => {
-    if(uuid !== '' || uuid != null){
+  const AssignDiscount = (uuid: string) => {
+    if (uuid !== '' || uuid != null) {
       let newAssign = {
         idcodigouuid: uuid,
         idticket: assignprops.idticket
-      }as assigndcodigodto
-      
-      updateFetcher('/api/workline/codigos/assign', newAssign).then((data) => {
-        if (data.succeeded){
-          assignprops.closemodal(false)
-        }
-        else
-          setScannedText(uuid+ JSON.stringify(newAssign)+ JSON.stringify(data));
+      } as assigndcodigoinputdto
 
-    })
+      updateFetcher('/api/workline/codigos/assign', newAssign).then((data) => {
+        assignprops.closemodal({
+          showModal: false,
+          triggerToast: true,
+          serverresponse: {
+            message: data.message,
+            succeeded: data.succeeded
+          }
+        })
+
+      })
     }
 
 
-}
+  }
   useEffect(() => {
     const video: HTMLVideoElement = videoElementRef.current ?? new HTMLVideoElement();
     const qrScanner = new QrScanner(
@@ -47,7 +50,6 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
     qrScanner.start();
 
     return () => {
-      console.log(qrScanner);
       qrScanner.stop();
       qrScanner.destroy();
     };
@@ -62,7 +64,6 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
       <div className="videoWrapper">
         <video className="qrVideo" height={400} width={220} ref={videoElementRef} />
       </div>
-      <p className="scannedText">SCANNED: {scanned}</p>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { addDatadto } from "@/DTOS/formularios/form.dto"
+
 export interface codigosdescuentodto{
     id: number,
     nombre: string,
@@ -27,12 +29,12 @@ export interface codigosdescuentoformdto{
     descuento: string
 }
 
-export interface assigndcodigodto{
+export interface assigndcodigoinputdto{
     idcodigouuid: string,
     idticket: number
 }
 export interface assignpropdto{
-    uuidticket: string,
     idticket: number,
+    dataForm: addDatadto,
     closemodal: Function
 }

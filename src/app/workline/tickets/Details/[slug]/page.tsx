@@ -18,7 +18,6 @@ const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.
 
 const Details = ({ params }: { params: { slug: string } }) => {
     let allInfo = {} as ticketallDto
-    const [modal, setModal] = useState(false)
     const [dataForm, setDataForm] = useState({
         showModal: false,
         triggerToast: false,
@@ -55,7 +54,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
     }
 
 
-    const qrscanner = modal ? <QrScannerDiscount uuidticket={uuid} idticket={allInfo.id} closemodal={setModal} /> : null
+    const qrscanner = dataForm.showModal ? <QrScannerDiscount dataForm={dataForm} closemodal={setDataForm} idticket={allInfo.id} /> : null
 
 
 

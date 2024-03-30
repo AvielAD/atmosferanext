@@ -39,7 +39,6 @@ const QRScanner = () => {
     qrScanner.start();
 
     return () => {
-      console.log(qrScanner);
       qrScanner.stop();
       qrScanner.destroy();
     };
@@ -54,7 +53,6 @@ const QRScanner = () => {
       <div className="videoWrapper">
         <video className="qrVideo" height={400} width={220} ref={videoElementRef} />
       </div>
-      <p className="scannedText">SCANNED: {scanned}</p>
     </div>
   );
 };

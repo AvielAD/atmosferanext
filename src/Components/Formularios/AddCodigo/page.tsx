@@ -10,7 +10,6 @@ const addFetcher = async (url: string, data: codigosdescuentoinputdto) => fetch(
 
 const Add = (props: addDataPropsFormDto) => {
     const router = useRouter()
-    const [disabledForm, setDisabledForm] = useState(false)
     const formTicket = {
         nombre: '',
         descripcion: '',

@@ -12,7 +12,7 @@ const Page = () => {
         triggerToast: false,
         serverresponse: {} as response
     } as addDatadto)
-    const qrscanner = modal ? <QrScanner /> : null
+    const qrscanner = dataForm.showModal ? <QrScanner /> : null
 
     return (<>
         <ModalGeneral showModal={dataForm.showModal} close={() => setDataForm({ ...dataForm, showModal: false, triggerToast: true })} >

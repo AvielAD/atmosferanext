@@ -18,11 +18,11 @@ const Index = (props: toastdatapropsdto) => {
             <div className="2">
                 <div className=''>
                     <div
-                        style={{ width: '100%', height: '100%', padding: '0.2rem' }}
-                        className={`${props.serverresponse.succeeded ? 'bg-success' : 'bg-danger'} 
-                        text-white border rounded-5`}>
-                        <div className="d-flex justify-content-center align-items-center p-1">
-                            <div className="text-white">
+                        style={{ width: '100%', height: '100%', padding: '0.2rem' }}>
+
+                        <div
+                            className={`badge ${props.serverresponse.succeeded ? 'text-bg-success' : 'text-bg-danger'}`}>
+                            <div className="toast-body text-white">
                                 {props.serverresponse.message}
                             </div>
                         </div>

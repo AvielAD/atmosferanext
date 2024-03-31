@@ -13,7 +13,7 @@ const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Tickets = () => {
   const router = useRouter()
-  const { data, error } = useSWR('/api/workline/tickets', fetcher)
+  const { data, error, mutate } = useSWR('/api/workline/tickets', fetcher)
 
   const [dataForm, setDataForm] = useState({
     showModal: false,
@@ -22,6 +22,8 @@ const Tickets = () => {
   } as addDatadto)
 
   if (!data) return <>loading...</>
+  if(dataForm.triggerToast)mutate()
+  
   return (<>
 
     <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >

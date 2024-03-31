@@ -25,7 +25,7 @@ const Tickets = () => {
   const componentRef = useRef<(HTMLDivElement | null)[]>([]);
   const componentClickRef = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const { data, error } = useSWR('/api/workline/codigos', fetcher)
+  const { data, error, mutate } = useSWR('/api/workline/codigos', fetcher)
 
   const printTicket = (index: number) => {
     if (componentRef.current) {
@@ -34,7 +34,7 @@ const Tickets = () => {
   }
 
   if (!data) return <>loading...</>
-
+  if(dataForm.triggerToast) mutate()
   return (<>
     <h1 className='text-center'>Codigos Descuento</h1>
 

@@ -19,17 +19,14 @@ const Page = () => {
             {qrscanner}
         </ModalGeneral>
         <div className="container fixed-bottom">
-            <div className="row w-100 h-100">
-                <div className="">
                     <button className="btn btn-primary" onClick={() =>
                         setDataForm({
                             ...dataForm,
                             showModal: true
                         })}>
-                        <i style={{ fontSize: "3rem" }} className="bi bi-camera"></i>
+                        <i style={{ fontSize: "2.5rem" }} className="bi bi-camera"></i>
+                        <p>Cerrar Ticket</p>
                     </button>
-                </div>
-            </div>
         </div>
     </>)
 }

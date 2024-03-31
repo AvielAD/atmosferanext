@@ -71,7 +71,7 @@ const Tickets = () => {
             ...dataForm,
             showModal: true
           })}>
-        <i style={{ fontSize: "3rem" }} className='bi bi-plus-circle h1'
+        <i style={{ fontSize: "3rem" }} className='bi bi-plus-circle'
         ></i>
 
       </button>

@@ -154,12 +154,13 @@ const Add = (props: addDataPropsFormDto) => {
 }
 
 export default Add
-
+const today = new Date()
+today.setHours(0,0,0,0)
 
 const addTicketSchema = object({
     nombre: string().required('Campo Requerido'),
     descripcion: string().required('Campo Requerido'),
-    fechavigencia: date().required('Campo Requerido'),
+    fechavigencia: date().min(today, 'Fecha vencimiento expirada').required('Campo Requerido'),
     replicas: number().min(1, 'Minimo instancias').typeError('valor no permitido').required('Campo Requerido'),
     descuento: number().min(1, 'El valor no puede ser negativo').typeError('valor no permitido').required('Campo Requerido'),
     idcatcodigo: number().min(1, 'Seleccione una Opcion').typeError('Seleccione una Opcion').required('Seleccione una opcion'),

@@ -17,6 +17,7 @@ const updateTicket = (url: string) => fetch(url, { method: 'PUT' }).then(r => r.
 
 
 const Details = ({ params }: { params: { slug: string } }) => {
+    let disabledCat = ["Finalizado", "Cancelado"]
     let allInfo = {} as ticketallDto
     const [dataForm, setDataForm] = useState({
         showModal: false,
@@ -24,8 +25,8 @@ const Details = ({ params }: { params: { slug: string } }) => {
         serverresponse: {} as response
     } as addDatadto)
     const uuid = params.slug
-    const reparacionDetail = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
-    const dataCancel = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
+    const {data:details, mutate:mutateDetails} = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
+    const { data: dataCancel, mutate: mutateCancel } = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
 
     const componentRef = useRef<HTMLDivElement>(null);
     const handlePrint = useReactToPrint({
@@ -37,9 +38,9 @@ const Details = ({ params }: { params: { slug: string } }) => {
         content: () => componentRef2.current,
     })
 
-    if (!reparacionDetail.data) return <>loading...</>
-    if (reparacionDetail.data) {
-        allInfo = reparacionDetail.data
+    if (!details) return <>loading...</>
+    if (details) {
+        allInfo = details
     }
 
     const closeTicket = () => {
@@ -48,11 +49,13 @@ const Details = ({ params }: { params: { slug: string } }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                console.log('Aceptado')
+                mutateDetails()
             })
 
     }
-
+    if (dataForm.triggerToast)
+        mutateDetails()
 
     const qrscanner = dataForm.showModal ? <QrScannerDiscount dataForm={dataForm} closemodal={setDataForm} idticket={allInfo.id} /> : null
 
@@ -116,7 +119,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 <h2 className="text-center">Acciones</h2>
 
                 <div className="col-6">
-                    <button className="btn btn-success w-100" disabled={allInfo.estado == "Finalizado"}>
+                    <button className="btn btn-success w-100" disabled={disabledCat.includes(allInfo.estado)}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-qr-code" onClick={handlePrint}></i>
                         <p>QR</p>
                     </button>
@@ -124,7 +127,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
 
                 <div className="col-6">
-                    <button className="btn btn-primary w-100" disabled={allInfo.estado !== "Finalizado"}>
+                    <button className="btn btn-primary w-100" disabled={disabledCat.includes(allInfo.estado)}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-printer" onClick={handlePrint2}></i>
                         <p>Ticket</p>
                     </button>
@@ -132,7 +135,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 </div>
 
                 <div className="col-6">
-                    <button className="btn btn-secondary w-100" disabled={allInfo.estado == "Finalizado"}>
+                    <button className="btn btn-secondary w-100" disabled={disabledCat.includes(allInfo.estado)}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-window-plus" onClick={() =>
                             setDataForm({
                                 ...dataForm,

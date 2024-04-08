@@ -16,6 +16,10 @@ const menusrutas: Array<menuoption> = [
     urlruta: "/workline/tickets"
   },
   {
+    nombreruta: "Servicios", 
+    urlruta: "/workline/servicios"
+  },
+  {
     nombreruta: "Codigos", 
     urlruta: "/workline/codigos"
   }

@@ -25,7 +25,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
         serverresponse: {} as response
     } as addDatadto)
     const uuid = params.slug
-    const {data:details, mutate:mutateDetails} = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
+    const { data: details, mutate: mutateDetails } = useSWR(`/api/workline/tickets/${uuid}`, fetcher)
     const { data: dataCancel, mutate: mutateCancel } = useSWR(`/api/workline/tickets/update/${uuid}`, updateTicket)
 
     const componentRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
     const qrscanner = dataForm.showModal ? <QrScannerDiscount dataForm={dataForm} closemodal={setDataForm} idticket={allInfo.id} /> : null
 
-
+    console.log(allInfo)
 
     return (<>
         <div className="d-none">
@@ -82,6 +82,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 tiempo={"5"}
                 plan={allInfo.category.nombre}
                 total={allInfo.total.toString()}
+                servicios={allInfo.servicios}
             ></TicketPrint>
         </div>
         <div className="container">
@@ -115,6 +116,21 @@ const Details = ({ params }: { params: { slug: string } }) => {
                 </div>
 
             </div>
+
+            <div className="row">
+                <h3>Servicios</h3>
+                {
+                    allInfo?.servicios?.map((item, index) => {
+                        return (
+                            <div key={index} className="d-flex justify-content-between  ">
+                                <div className="text-end "><p>{item.nombre}</p></div>
+                                <div className="text-end"><p>${item.costo}</p></div>
+                            </div>)
+                    })
+                }
+
+            </div>
+
             <div className="row gx-1 gy-1">
                 <h2 className="text-center">Acciones</h2>
 
@@ -127,7 +143,7 @@ const Details = ({ params }: { params: { slug: string } }) => {
 
 
                 <div className="col-6">
-                    <button className="btn btn-primary w-100" disabled={disabledCat.includes(allInfo.estado)}>
+                    <button className="btn btn-primary w-100" disabled={allInfo.estado != "Finalizado"}>
                         <i style={{ fontSize: '2rem' }} className="bi bi-printer" onClick={handlePrint2}></i>
                         <p>Ticket</p>
                     </button>

@@ -21,6 +21,14 @@ const Page = React.forwardRef<HTMLDivElement, ticketdetails>((props, ref) => {
           <p>Datos Cliente</p>
           <p>Nombre: {props.cliente}</p>
         </div>
+        {
+          props.servicios?.length > 0 ?  
+          <div>
+              {props.servicios.map((item, index)=>{
+                return (<p key={index}>{item.nombre} ${item.costo}</p>)
+              })}
+          </div> : null
+        }
 
         <div className={styles.formularioCliente}>
           <p>Total</p>

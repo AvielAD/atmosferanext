@@ -24,7 +24,7 @@ const Page = () => {
                             ...dataForm,
                             showModal: true
                         })}>
-                        <i style={{ fontSize: "2.5rem" }} className="bi bi-camera"></i>
+                        <i style={{ fontSize: "1.5rem" }} className="bi bi-camera"></i>
                         <p>Cerrar Ticket</p>
                     </button>
         </div>

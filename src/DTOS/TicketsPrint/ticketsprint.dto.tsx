@@ -1,3 +1,5 @@
+import { serviciodto } from "../workline/servicios/servicio.dto"
+import { servicedto } from "../workline/tickets/ticket.dto"
 
 export interface ticketqr{
     uuidqr: string,
@@ -10,5 +12,6 @@ export interface ticketdetails{
     horafin: string,
     tiempo: string,
     plan: string,
-    total: string
+    total: string,
+    servicios: Array<servicedto>
 }

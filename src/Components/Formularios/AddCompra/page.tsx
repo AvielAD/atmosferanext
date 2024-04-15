@@ -59,7 +59,7 @@ const Add = (props: addDataPropsFormDto) => {
                             (props: FormikProps<any>) => (
                                 <Form>
                                     <Field as="select" name="idservicio" className="form-select text-dark">
-                                        <option value={0}>Seleccionar Equipo...</option>
+                                        <option value={0}>Seleccionar Producto...</option>
                                         {
                                             ServiciosData?.map((item: serviciodto, index: number) => {
                                                 return <option className="" key={index} value={item.id}>

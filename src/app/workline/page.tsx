@@ -18,16 +18,26 @@ const Page = () => {
         <ModalGeneral showModal={dataForm.showModal} close={() => setDataForm({ ...dataForm, showModal: false, triggerToast: true })} >
             {qrscanner}
         </ModalGeneral>
-        <div className="container fixed-bottom">
-                    <button className="btn btn-primary" onClick={() =>
-                        setDataForm({
-                            ...dataForm,
-                            showModal: true
-                        })}>
-                        <i style={{ fontSize: "1.5rem" }} className="bi bi-camera"></i>
-                        <p>Cerrar Ticket</p>
-                    </button>
+        <div>
+            <p>Text example</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum suscipit id quo, qui quidem magni itaque officia deserunt, aliquam minima perferendis voluptatem error magnam ipsam ad iusto rerum obcaecati. Eum.</p>
         </div>
+        
     </>)
 }
 

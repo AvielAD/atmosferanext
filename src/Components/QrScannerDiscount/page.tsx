@@ -53,7 +53,7 @@ const QRScannerDiscount = (assignprops: assignpropdto) => {
       qrScanner.stop();
       qrScanner.destroy();
     };
-  }, []);
+  });
 
   // const qrScanner = new QrScanner(videoElement, (result) =>
   //   console.log('decoded qr code:', result)

@@ -27,10 +27,6 @@ const menusrutas: Array<menuoption> = [
   }
 ]
 
-export const metadata: Metadata = {
-  title: 'Atmósfera',
-  description: 'Capacitación presencial',
-}
 
 export default function EventosLayout({
   children,

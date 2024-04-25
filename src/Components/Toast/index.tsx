@@ -12,7 +12,7 @@ const Index = (props: toastdatapropsdto) => {
 
         }
 
-    }, [props.show])
+    })
     return Object.keys(props.serverresponse).length > 0 ? (<>
         <div className={`z-2 position-absolute bottom-0 end-0 ${props.show ? '' : 'visually-hidden'}`}>
             <div className="2">

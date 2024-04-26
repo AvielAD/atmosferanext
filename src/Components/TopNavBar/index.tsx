@@ -29,12 +29,13 @@ const Index = (props: menunav) => {
     return (
         <>
             <div className="bg-secondary rounded shadow h-100 w-100">
-                <div className="">
-                    <h1>Menu</h1>
+                <div className="container">
+                    <h1 className="text-center">Menu</h1>
+                    <hr />
                     <ul className="list-group">
                         {
                             rutas.map((item: menuoption, index: number) => {
-                                return <Link key={index} href={item.urlruta}>{item.nombreruta}</Link>
+                                return <Link className="m-2" key={index} href={item.urlruta}>{item.nombreruta}</Link>
                             })
                         }
                     </ul>

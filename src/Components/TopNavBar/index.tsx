@@ -16,7 +16,6 @@ const Index = (props: menunav) => {
             if (menu && wrapperRef.current && logowrapRef.current &&
                 !wrapperRef.current.contains(event.target) && !logowrapRef.current.contains(event.target)) {
                 setMenu(false)
-                console.log('Click')
             }
         }
 

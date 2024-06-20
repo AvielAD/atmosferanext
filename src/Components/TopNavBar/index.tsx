@@ -31,10 +31,10 @@ const Index = (props: menunav) => {
                 <div className="container">
                     <h1 className="text-center">Menu</h1>
                     <hr />
-                    <ul className="list-group">
+                    <ul className="list-group text-white">
                         {
                             rutas.map((item: menuoption, index: number) => {
-                                return <Link className="m-2" key={index} href={item.urlruta}>{item.nombreruta}</Link>
+                                return <Link className="m-2 text-white text-decoration-none" key={index} href={item.urlruta}>{item.nombreruta}</Link>
                             })
                         }
                     </ul>

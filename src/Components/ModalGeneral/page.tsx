@@ -11,7 +11,6 @@ const Page = (props: dataFormsModalDto) => {
                             <div className="d-flex justify-content-center">
                                 <div className="w-75">
                                     {props.children}
-
                                 </div>
                             </div>
 

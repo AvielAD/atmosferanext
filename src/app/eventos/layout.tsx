@@ -1,52 +1,86 @@
+'use client'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import {Providers} from "./provider";
+import { Providers } from "./provider";
 import TopNavBar from '../../Components/TopNavBar'
 import { menunav, menuoption } from '@/DTOS/menuNav/menunav';
-
+import styles from './styles.module.scss'
+import { useEffect, useRef, useState } from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 const menusrutas: Array<menuoption> = [
   {
-    nombreruta: "Inscritos", 
+    nombreruta: "Inscritos",
     urlruta: "/eventos/inscrito"
   },
   {
-    nombreruta: "Cursos", 
+    nombreruta: "Cursos",
     urlruta: "/eventos/curso"
   },
   {
-    nombreruta: "Instructores", 
+    nombreruta: "Instructores",
     urlruta: "/eventos/instructor"
   },
   {
-    nombreruta: "Eventos", 
+    nombreruta: "Eventos",
     urlruta: "/eventos/evento"
   },
   {
-    nombreruta: "Codigo Descuento", 
+    nombreruta: "Codigo Descuento",
     urlruta: "/eventos/codigodescuento"
   },
   {
-    nombreruta: "WorkLine", 
+    nombreruta: "WorkLine",
     urlruta: "/workline"
-  },
-] 
+  }
+]
 
-export const metadata: Metadata = {
-  title: 'Atmósfera',
-  description: 'Capacitación presencial',
-}
 
 export default function EventosLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+
+  const [menu, setMenu] = useState(true);
+  const wrapperRef = useRef(null) as any
+  const logowrapRef = useRef(null) as any
+
+  useEffect(() => {
+    const handleOutSideClick = (event: any) => {
+      if (menu && wrapperRef.current && logowrapRef.current &&
+        !wrapperRef.current.contains(event.target) && !logowrapRef.current.contains(event.target)) {
+        setMenu(false)
+      }
+    }
+
+    document.addEventListener('click', handleOutSideClick)
+    return () => {
+      document.removeEventListener('click', handleOutSideClick)
+    }
+  })
+
   return (
-    <div>
-        <TopNavBar rutas={menusrutas}/>
-        <Providers>{children}</Providers> 
-    </div>
+    <>
+      <div ref={wrapperRef} className={`${styles.SideBar} ${menu ? "d-flex" : "d-none"}`}>
+        <TopNavBar rutas={menusrutas} />
+      </div>
+
+      <div className={styles.ContainerLayout} >
+
+        <div className={styles.areaTopbar}>
+          <div className='container'>
+            <div className='d-flex justify-content-end'>
+              <i ref={logowrapRef} style={{ fontSize: '2rem' }} className="bi bi-list" onClick={() => setMenu(!menu)}></i>
+            </div>
+          </div>
+        </div>
+        <div className={styles.areaMain}>
+          <Providers>{children}</Providers>
+        </div>
+
+      </div>
+    </>
   )
 }

@@ -46,7 +46,7 @@ const Add = (props: addDataPropsFormDto) => {
     if (ServiciosData) ArrayServicios = ServiciosData
 
     return (<>
-        <div className="container mt-5">
+        <div className="container mt-5 bg-primary">
             <div className="row d-flex justify-content-center">
                 <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-4 col-sm-6 col-10">
                     <div className="h3 text-center">Agregar Compra</div>

@@ -1,3 +1,3 @@
-export interface AddMenu{
+export interface AddMenuDto{
     url: string
 }

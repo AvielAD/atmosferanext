@@ -9,6 +9,16 @@ import ModalGeneral from '@/Components/ModalGeneral/page'
 import Toast from '@/Components/Toast/index'
 import { addDatadto } from '@/DTOS/formularios/form.dto'
 import { response } from '@/DTOS/response/response'
+import { Alert, Box, Grid, Modal, Typography } from '@mui/material'
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { StyledTableCell, StyledTableRow } from '@/Utilities/TableHelpers/StyledTable'
+
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const Tickets = () => {
@@ -30,55 +40,10 @@ const Tickets = () => {
   if (dataForm.triggerToast) mutate()
   if (dataForm2.triggerToast) mutate()
 
-  return (<>
-
-    <ModalGeneral showModal={dataForm.showModal} close={() => setDataForm({ ...dataForm, showModal: false })} >
-      <AddTicket dataform={dataForm} close={setDataForm}></AddTicket>
-    </ModalGeneral>
-
-    <ModalGeneral showModal={dataForm2.showModal} close={() => setDataForm2({ ...dataForm2, showModal: false })} >
-      <AddCompra dataform={dataForm2} close={setDataForm2}></AddCompra>
-    </ModalGeneral>
-    <div style={{ height: "80vh" }} className='container overflow-scroll'>
-      <h1 className='row text-center'>Tickets Abiertos</h1>
-
-      <div className='row'>
-
-        <table className="table w-100">
-          <thead >
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              data?.map((item: ticketdto, index: number) => {
-                return (
-                  <tr key={item.id}>
-                    <td>{item.nombre}</td>
-                    <td>{item.category.nombre}</td>
-                    <td className='d-flex justify-content-evenly'>
-                      <i onClick={
-                        () => router.push(`/workline/tickets/Details/${item.uuid}`)
-
-                      } className='bi bi-eye w-50'></i>
-                    </td>
-                  </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
-
-      </div>
-
-    </div>
-    <div className='container fixed-bottom'>
-      <div className='row'>
-
-        <div className='col'>
+  return (
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
           <button className='btn btn-primary'
             onClick={() =>
               setDataForm({
@@ -89,9 +54,8 @@ const Tickets = () => {
             >Ticket</i>
           </button>
 
-        </div>
-
-        <div className='col'>
+        </Grid>
+        <Grid item xs={6}>
           <button className='btn btn-primary'
             onClick={() =>
               setDataForm2({
@@ -102,23 +66,73 @@ const Tickets = () => {
             >Venta</i>
           </button>
 
+        </Grid>
+        <Grid item xs={12}>
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: '48rem' }}>
+              <Table stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Ticket</StyledTableCell>
+                    <StyledTableCell >Tipo</StyledTableCell>
+                    <StyledTableCell >Acciones</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {
+                    data?.map((item: ticketdto, index: number) => {
+                      return (
+                        <StyledTableRow key={item.id}>
+                          <StyledTableCell>{item.nombre}</StyledTableCell>
+                          <StyledTableCell>{item.category.nombre}</StyledTableCell>
+                          <StyledTableCell className='d-flex justify-content-evenly'>
+                            <i onClick={
+                              () => router.push(`/workline/tickets/Details/${item.uuid}`)
+
+                            } className='bi bi-eye w-50'></i>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      )
+                    })
+
+                  }
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </Grid>
+      </Grid>
+
+      <Modal
+        open={dataForm.showModal}
+        onClose={() => setDataForm({ ...dataForm, showModal: false })}>
+        <Box>
+          <AddTicket dataform={dataForm} close={setDataForm}></AddTicket>
+        </Box>
+      </Modal>
+
+      <Modal
+        open={dataForm2.showModal}
+        onClose={() => setDataForm2({ ...dataForm2, showModal: false })}>
+        <Box>
+          <AddCompra dataform={dataForm2} close={setDataForm2}></AddCompra>
+
+        </Box>
+      </Modal>
+      <div className='container fixed-bottom'>
+        <div className='row'>
+
+          <div className='col'>
+            <Toast show={dataForm.triggerToast}
+              close={() => setDataForm({ ...dataForm, triggerToast: false })}
+              serverresponse={dataForm.serverresponse}></Toast>
+            <Toast show={dataForm2.triggerToast}
+              close={() => setDataForm2({ ...dataForm2, triggerToast: false })}
+              serverresponse={dataForm2.serverresponse}></Toast>
+          </div>
         </div>
-
-        <div className='col'>
-          <Toast show={dataForm.triggerToast}
-            close={() => setDataForm({ ...dataForm, triggerToast: false })}
-            serverresponse={dataForm.serverresponse}></Toast>
-          <Toast show={dataForm2.triggerToast}
-            close={() => setDataForm2({ ...dataForm2, triggerToast: false })}
-            serverresponse={dataForm2.serverresponse}></Toast>
-
-        </div>
-
       </div>
-
-    </div>
-
-  </>)
+    </>)
 }
 
 

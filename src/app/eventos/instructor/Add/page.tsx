@@ -1,5 +1,5 @@
 'use client'
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { CursoForm } from "@/DTOS/cursos/cursoform";
 import { instructor, instructorForm } from "@/DTOS/instructor/instructor.dto";
 import { ErrorMessage, Field, Form, Formik } from "formik";

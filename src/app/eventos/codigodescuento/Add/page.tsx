@@ -1,6 +1,6 @@
 'use client'
 import { codigodescuento, codigodescuentoform } from "@/DTOS/codigo/codigo.dto";
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { CursoForm } from "@/DTOS/cursos/cursoform";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";

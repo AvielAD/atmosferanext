@@ -1,4 +1,4 @@
-export interface Curso{
+export interface CursoDto{
     id: string,
     nombre: string,
     descripcion: string,

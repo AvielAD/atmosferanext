@@ -1,4 +1,4 @@
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { eventoform, eventorequest } from "@/DTOS/eventos/eventoform";
 import { eventosview } from "@/DTOS/eventos/eventos";
 import { inscritos } from "@/DTOS/eventos/inscritos";
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
-    const data:Curso = await req.json()
+    const data:CursoDto = await req.json()
     console.log("Body: "+ JSON.stringify(data))
     
     try {

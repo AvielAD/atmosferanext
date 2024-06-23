@@ -1,9 +1,7 @@
 'use client'
-import { Curso } from "@/DTOS/curso.dto";
 import { createTicketDto, createTicketFormDto } from "@/DTOS/workline/tickets/ticket.dto";
 import { Field, Form, Formik, FormikProps, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { object, string, number, date, InferType } from 'yup';
 
 const addFetcher = async (url: string, data: createTicketDto) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())

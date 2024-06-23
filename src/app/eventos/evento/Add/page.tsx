@@ -1,5 +1,5 @@
 'use client'
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { eventorequest } from "@/DTOS/eventos/eventoform";
 import { instructor } from "@/DTOS/instructor/instructor.dto";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ const addFetcher = async (url: string, data: eventorequest) => fetch(url, { meth
 const getFetcher = async (url: string) => fetch(url, { method: "GET" }).then(r => r.json())
 
 const Add = () => {
-    const [dataCursos, setDataCursos] = useState<Array<Curso>>([])
+    const [dataCursos, setDataCursos] = useState<Array<CursoDto>>([])
     const [dataInstructores, setDataInstructores] = useState<Array<instructor>>([])
     const [dateStart, setDateStart] = useState<string>('')
     const router = useRouter()
@@ -60,7 +60,7 @@ const Add = () => {
             <select name="idcurso" className="form-select" defaultValue={"DEFAULT"}>
                 <option value={"DEFAULT"}> Seleccionar ...</option>
                 {
-                    dataCursos.map((item: Curso, index: number) => {
+                    dataCursos.map((item: CursoDto, index: number) => {
                         return <option key={index} value={item.id.toString()}>{item.nombre}</option>
                     })
                 }

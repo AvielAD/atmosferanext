@@ -1,11 +1,11 @@
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { inscritos } from "@/DTOS/eventos/inscritos";
 import { response } from "@/DTOS/response/response";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
-    let Cursos: Array<Curso> = []
+    let Cursos: Array<CursoDto> = []
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
@@ -29,7 +29,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
-    const data:Curso = await req.json()
+    const data:CursoDto = await req.json()
     console.log("Body: "+ JSON.stringify(data))
     
     try {
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     let Response = {} as response
     const testcookies = cookies().get('token')
-    const data:Curso = await req.json()
+    const data:CursoDto = await req.json()
     console.log("Body: "+ JSON.stringify(data))
     
     try {

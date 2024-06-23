@@ -1,10 +1,10 @@
 'use client'
-import { Curso } from "@/DTOS/curso.dto";
+import { CursoDto } from "@/DTOS/curso.dto";
 import { CursoForm } from "@/DTOS/cursos/cursoform";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
-const addFetcher = async (url: string, data:Curso) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
+const addFetcher = async (url: string, data:CursoDto) => fetch(url, { method: "POST", body: JSON.stringify(data) }).then(r => r.json())
 
 const Add = () => {
     const router = useRouter()
@@ -15,7 +15,7 @@ const Add = () => {
             initialValues={initialValues}
             validate={validations}
             onSubmit={async (values, { resetForm }) => {
-                const cursoInfo: Curso = { 
+                const cursoInfo: CursoDto = { 
                     id: 0,
                     nombre: values.nombre,
                     descripcion: values.descripcion,

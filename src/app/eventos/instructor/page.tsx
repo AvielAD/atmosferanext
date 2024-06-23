@@ -1,6 +1,6 @@
 'use client'
 import useSWR from 'swr'
-import { Curso } from "@/DTOS/curso.dto"
+import { CursoDto } from "@/DTOS/curso.dto"
 import MenuAdd from "@/Components/AddMenu"
 import { useRouter } from 'next/navigation'
 import { instructor } from '@/DTOS/instructor/instructor.dto'

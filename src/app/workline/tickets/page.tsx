@@ -9,7 +9,7 @@ import ModalGeneral from '@/Components/ModalGeneral/page'
 import Toast from '@/Components/Toast/index'
 import { addDatadto } from '@/DTOS/formularios/form.dto'
 import { response } from '@/DTOS/response/response'
-import { Alert, Box, Grid, Modal, Typography } from '@mui/material'
+import { Alert, Box, Button, Grid, Modal, Typography } from '@mui/material'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,7 +19,16 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { StyledTableCell, StyledTableRow } from '@/Utilities/TableHelpers/StyledTable'
 
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import { LocalActivity, MonetizationOn } from '@mui/icons-material'
+
 const fetcher = (url: string) => fetch(url).then(r => r.json())
+const actions = [
+  { icon: <LocalActivity />, name: 'Ticket' },
+  { icon: <MonetizationOn />, name: 'Venta' },
+];
 
 const Tickets = () => {
   const router = useRouter()
@@ -43,30 +52,6 @@ const Tickets = () => {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <button className='btn btn-primary'
-            onClick={() =>
-              setDataForm({
-                ...dataForm,
-                showModal: true
-              })}>
-            <i style={{ fontSize: "1rem" }} className='bi bi-plus-circle'
-            >Ticket</i>
-          </button>
-
-        </Grid>
-        <Grid item xs={6}>
-          <button className='btn btn-primary'
-            onClick={() =>
-              setDataForm2({
-                ...dataForm2,
-                showModal: true
-              })}>
-            <i style={{ fontSize: "1rem" }} className='bi bi-plus-circle'
-            >Venta</i>
-          </button>
-
-        </Grid>
         <Grid item xs={12}>
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: '48rem' }}>
@@ -101,6 +86,34 @@ const Tickets = () => {
             </TableContainer>
           </Paper>
         </Grid>
+      </Grid>
+
+      <Grid container sx={{ position: "sticky", right:0 }}>
+        <Box >
+          <SpeedDial
+            ariaLabel="SpeedDial basic example"
+            icon={<SpeedDialIcon />}
+          >
+            <SpeedDialAction
+              icon={<LocalActivity />}
+              tooltipTitle={"Ticket"}
+              onClick={() =>
+                setDataForm({
+                  ...dataForm,
+                  showModal: true
+                })}
+            />
+            <SpeedDialAction
+              icon={<MonetizationOn />}
+              tooltipTitle={"Venta"}
+              onClick={() =>
+                setDataForm2({
+                  ...dataForm2,
+                  showModal: true
+                })}
+            />
+          </SpeedDial>
+        </Box>
       </Grid>
 
       <Modal

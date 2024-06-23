@@ -1,6 +1,6 @@
 'use client'
 import useSWR from 'swr'
-import { Curso } from "@/DTOS/curso.dto"
+import { CursoDto } from "@/DTOS/curso.dto"
 import MenuAdd from "@/Components/AddMenu"
 import { useRouter } from 'next/navigation'
 import ToastPersonal from '@/Components/Toast'
@@ -51,7 +51,7 @@ const Curso = () => {
         <tbody>
 
           {
-            data.map((item: Curso, index: number) => {
+            data.map((item: CursoDto, index: number) => {
               return (
                 <tr key={item.id}>
                   <th scope="row">{index}</th>

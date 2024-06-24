@@ -88,7 +88,7 @@ const Tickets = () => {
         </Grid>
       </Grid>
 
-      <Grid container sx={{ position: "sticky", bottom:16, right:16 }}>
+      <Grid container sx={{ position: "sticky", bottom: 16, right: 16 }}>
         <Box>
           <SpeedDial
             ariaLabel="SpeedDial basic example"
@@ -132,19 +132,17 @@ const Tickets = () => {
 
         </Box>
       </Modal>
-      <div className='container fixed-bottom'>
-        <div className='row'>
+      <Box sx={{ position: "sticky", bottom: 16, right: 16 }}>
+        <Toast show={dataForm.triggerToast}
+          close={() => setDataForm({ ...dataForm, triggerToast: false })}
+          serverresponse={dataForm.serverresponse}></Toast>
+      </Box>
+      <Box sx={{ position: "sticky", bottom: 16, right: 16 }}>
+        <Toast show={dataForm2.triggerToast}
+          close={() => setDataForm2({ ...dataForm2, triggerToast: false })}
+          serverresponse={dataForm2.serverresponse}></Toast>
+      </Box>
 
-          <div className='col'>
-            <Toast show={dataForm.triggerToast}
-              close={() => setDataForm({ ...dataForm, triggerToast: false })}
-              serverresponse={dataForm.serverresponse}></Toast>
-            <Toast show={dataForm2.triggerToast}
-              close={() => setDataForm2({ ...dataForm2, triggerToast: false })}
-              serverresponse={dataForm2.serverresponse}></Toast>
-          </div>
-        </div>
-      </div>
     </>)
 }
 

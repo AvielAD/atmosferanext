@@ -1,7 +1,7 @@
 'use client'
 import useSWR from 'swr'
 import { useRouter } from 'next/navigation'
-import {  useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import AddCodigo from '@/Components/Formularios/AddCodigo/page'
 import ModalGeneral from '@/Components/ModalGeneral/page'
 import { codigosdescuentodto } from '@/DTOS/workline/codigos/codigos.dto'
@@ -11,6 +11,19 @@ import ReactToPrint from 'react-to-print'
 import { response } from '@/DTOS/response/response'
 import { addDatadto } from '@/DTOS/formularios/form.dto'
 import Toast from '@/Components/Toast'
+
+import { Box, Button, Fab, Grid, Icon, Modal, styled } from "@mui/material"
+import { StyledTableCell, StyledTableRow } from "@/Utilities/TableHelpers/StyledTable"
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Add } from '@mui/icons-material'
+import { FormatDateMed, FormatDateNotIso } from "@/Utilities/DateTimeHelpers/DateFormat"
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
@@ -34,69 +47,76 @@ const Tickets = () => {
   }
 
   if (!data) return <>loading...</>
-  if(dataForm.triggerToast) mutate()
+  if (dataForm.triggerToast) mutate()
+
+    console.log(data)
   return (<>
-    <h1 className='text-center'>Codigos Descuento</h1>
 
-    <ModalGeneral showModal={dataForm.showModal} close={()=>setDataForm({...dataForm, showModal: false, triggerToast: true})} >
+
+    <Grid container rowSpacing={2} >
+      <Grid item xs={12}>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: '48rem' }} >
+            <Table stickyHeader>
+              <TableHead sx={{ color: 'white' }}>
+                <TableRow>
+                  <StyledTableCell>Codigo</StyledTableCell>
+                  <StyledTableCell>Vencimiento</StyledTableCell>
+                  <StyledTableCell>Descuento</StyledTableCell>
+                  <StyledTableCell>QR</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {
+                  data?.map((item: codigosdescuentodto, index: number) => {
+                    return (
+                      <StyledTableRow key={index}>
+                        <TableCell>{item.nombre}</TableCell>
+                        <TableCell>{FormatDateNotIso(item.fechavigencia)}</TableCell>
+                        <TableCell>{item.descuento}</TableCell>
+                        <TableCell>
+                          <ReactToPrint key={index + 100}
+                            trigger={() => <button className='btn btn-primary' name={"button: " + index} ref={(el) => componentClickRef.current[index] = el}> <i className='bi bi-qr-code'></i> </button>}
+                            content={() => componentRef.current[index]}
+                          />
+                        </TableCell>
+                        <TableCell sx={{ display: 'none' }}>
+                          <QrPrint subject='Codigo de Descuento' ref={(el) => { componentRef.current[index] = el }} uuidqr={item.uuidkey}></QrPrint>
+                        </TableCell>
+
+                      </StyledTableRow>)
+                  })
+                }
+              </TableBody>
+            </Table>
+
+          </TableContainer>
+        </Paper>
+      </Grid>
+    </Grid>
+
+    <Modal
+      open={dataForm.showModal}
+      onClose={() => setDataForm({ ...dataForm, showModal: false, triggerToast: true })}
+    >
       <AddCodigo dataform={dataForm} close={setDataForm}></AddCodigo>
-    </ModalGeneral>
+    </Modal>
 
-    <div style={{ height: "80vh" }} className='container overflow-scroll'>
+    <Box display={"flex"} sx={{ position: "sticky", bottom: 16, right: 16}}>
+      <Fab color='primary' onClick={() =>
+        setDataForm({
+          ...dataForm,
+          showModal: true
+        })}>
+        <Add></Add>
+      </Fab>
+    </Box>
 
-      <div className='row'>
-        <table className="table w-100">
-          <thead >
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Vencimiento</th>
-              <th scope="col">Descuento</th>
-              <th scope="col">QR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              data.map((item: codigosdescuentodto, index: number) => {
-                return (
-                  <tr key={item.id}>
-                    <td>{item.nombre}</td>
-                    <td>{DateTime.fromISO(item.fechavigencia.toString()).toLocaleString(DateTime.DATE_MED)}</td>
-                    <td>{item.descuento} %</td>
-                    <td className=''>
-                      <ReactToPrint key={index + 100}
-                        trigger={() => <button className='btn btn-primary' name={"button: " + index} ref={(el) => componentClickRef.current[index] = el}> <i className='bi bi-qr-code'></i> </button>}
-                        content={() => componentRef.current[index]}
-                      />
-                      <div className='d-none'>
-                        <QrPrint subject='Codigo de Descuento' ref={(el) => { componentRef.current[index] = el }} uuidqr={item.uuidkey}></QrPrint>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
-
-      </div>
-
-    </div>
-    <div className='container fixed-bottom'>
-      <button className='btn btn-primary' onClick={() =>
-          setDataForm({
-            ...dataForm,
-            showModal: true
-          })}>
-        <i style={{ fontSize: "3rem" }} className='bi bi-plus-circle'
-        ></i>
-
-      </button>
-
+    <Box sx={{ position: "sticky", bottom: 16, right: 16, zIndex: 5 }}>
       <Toast show={dataForm.triggerToast}
-        close={()=>setDataForm({...dataForm,triggerToast: false})}
+        close={() => setDataForm({ ...dataForm, triggerToast: false })}
         serverresponse={dataForm.serverresponse}></Toast>
-
-    </div>
+    </Box>
 
   </>)
 }

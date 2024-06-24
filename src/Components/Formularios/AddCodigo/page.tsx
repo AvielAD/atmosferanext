@@ -68,7 +68,7 @@ const Add = (props: addDataPropsFormDto) => {
     }
 
     return (<>
-        <div className="container">
+        <div className="container bg-primary">
             <div className="row d-flex justify-content-center">
                 <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-4 col-sm-6 col-10">
                     <div className="h4 text-center">Agregar Codigo</div>

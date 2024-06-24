@@ -54,7 +54,7 @@ const Tickets = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: '48rem' }}>
+            <TableContainer sx={{ maxHeight: '35rem' }}>
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
@@ -88,33 +88,31 @@ const Tickets = () => {
         </Grid>
       </Grid>
 
-      <Grid container sx={{ position: "sticky", bottom: 16, right: 16 }}>
-        <Box>
-          <SpeedDial
-            ariaLabel="SpeedDial basic example"
-            icon={<SpeedDialIcon />}
-          >
-            <SpeedDialAction
-              icon={<LocalActivity />}
-              tooltipTitle={"Ticket"}
-              onClick={() =>
-                setDataForm({
-                  ...dataForm,
-                  showModal: true
-                })}
-            />
-            <SpeedDialAction
-              icon={<MonetizationOn />}
-              tooltipTitle={"Venta"}
-              onClick={() =>
-                setDataForm2({
-                  ...dataForm2,
-                  showModal: true
-                })}
-            />
-          </SpeedDial>
-        </Box>
-      </Grid>
+      <Box display={"flex"} sx={{ position: "sticky", bottom: 16, right: 16, zIndex: 5 }}>
+        <SpeedDial
+          ariaLabel="SpeedDial basic example"
+          icon={<SpeedDialIcon />}
+        >
+          <SpeedDialAction
+            icon={<LocalActivity />}
+            tooltipTitle={"Ticket"}
+            onClick={() =>
+              setDataForm({
+                ...dataForm,
+                showModal: true
+              })}
+          />
+          <SpeedDialAction
+            icon={<MonetizationOn />}
+            tooltipTitle={"Venta"}
+            onClick={() =>
+              setDataForm2({
+                ...dataForm2,
+                showModal: true
+              })}
+          />
+        </SpeedDial>
+      </Box>
 
       <Modal
         open={dataForm.showModal}

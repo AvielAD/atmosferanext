@@ -88,8 +88,8 @@ const Tickets = () => {
         </Grid>
       </Grid>
 
-      <Grid container sx={{ position: "sticky", right:0 }}>
-        <Box >
+      <Grid container sx={{ position: "sticky", bottom:16, right:16 }}>
+        <Box>
           <SpeedDial
             ariaLabel="SpeedDial basic example"
             icon={<SpeedDialIcon />}

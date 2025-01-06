@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
     try {
         if(testcookies)
-            await fetch('https://backwl.atmosfera.la/api/codigos/normal', {
+            await fetch('https://backwl.softwarp.net/api/codigos/normal', {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {

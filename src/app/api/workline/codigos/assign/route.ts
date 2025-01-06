@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest) {
     
     try {
         if (testcookies)
-            await fetch('https://backwl.atmosfera.la/api/assigncode', {
+            await fetch('https://backwl.softwarp.net/api/assigncode', {
                 method: "PUT",
                 body: JSON.stringify(data),
                 headers: {

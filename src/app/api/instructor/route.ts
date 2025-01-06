@@ -8,7 +8,7 @@ export async function GET() {
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
-            await fetch('https://atmosferaform.localfix.mx/api/instructor', {
+            await fetch('https://atmosferaform.softwarp.net/api/instructor', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`

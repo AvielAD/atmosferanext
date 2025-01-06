@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, {params}: {params: {slug: string}}) 
     const uuidsearch = params.slug
     try {
         if (testcookies)
-            await fetch(`https://backwl.atmosfera.la/api/tickets/${uuidsearch}`, {
+            await fetch(`https://backwl.softwarp.net/api/tickets/${uuidsearch}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`

@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     
     try {
         if (testcookies)
-            await fetch('https://backwl.atmosfera.la/api/caja', {
+            await fetch('https://backwl.softwarp.net/api/caja', {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {

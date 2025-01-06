@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, {params}: {params: {slug: string}}) 
     
     try {
         if (testcookies)
-            await fetch(`https://backwl.atmosfera.la/api/tickets/${uuidsearch}`, {
+            await fetch(`https://backwl.softwarp.net/api/tickets/${uuidsearch}`, {
                 method: "PUT",
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`,

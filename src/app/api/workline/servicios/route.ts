@@ -8,7 +8,7 @@ export async function GET() {
     const testcookies = cookies().get('token')
     try {
         if (testcookies)
-            await fetch('https://backwl.atmosfera.la/api/servicios', {
+            await fetch('https://backwl.softwarp.net/api/servicios', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${testcookies.value}`
